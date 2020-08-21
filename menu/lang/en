@@ -1,0 +1,48 @@
+#!/bin/bash
+
+######################################################################
+#           Auto Install & Optimize LEMP Stack on CentOS 7, 8        #
+#                                                                    #
+#                Author: Sanvv - HOSTVN Technical                    #
+#                  Website: https://hostvn.vn                        #
+#                                                                    #
+#              Please do not remove copyright. Thank!                #
+#  Please do not copy under any circumstance for commercial reason!  #
+######################################################################
+
+# shellcheck disable=SC2034
+
+ERROR_OCCURRED="An error occurred."
+CHECK_SERVICES="Please check the following services:"
+DOMAIN_EXISTS1="Domain already exists on vps."
+DOMAIN_EXISTS2="You need to delete the Domain Name if you want to add it again."
+WRONG_USER="The user you entered is not in the correct format."
+DATABASE_EXISTS="Database already exists on VPS."
+MYSQL_USER_EXISTS="Mysql User already exists on VPS."
+NGINX_NO_WORK="Current Nginx is not working. Please check back."
+DNS_FAIL1="The domain name is not installed on VPS or DNS. Please check back."
+DNS_FAIL2="If you are new to the new name please take 30 black minutes and 24 hours to get the most updated DNS after retrying."
+LE_NO_EXISTS="Names not installed Let's Encrypt."
+NO_WP="This website does not use WordPress."
+IS_WP1="This website does not use WordPress."
+IS_WP2="Please use the Manage WordPress menu to perform this function."
+WPCONFIG_NOT_EXISTS="File wp-config.php does not exist. please check again."
+NO_BACKUP="This domain has no backup."
+LIST_DOMAIN="Domain list: "
+LIST_BACKUP="Backup list: "
+SELECT_OPTION="Enter your choices [0 = Exit]: "
+SELECT_SOURCE="Choose the source code you use: "
+WRONG_DOMAIN="The domain name is not in the correct format."
+EMPTY_DOMAIN="No domain name exists on the system."
+WRONG_SELECT="You entered incorrectly, please re-enter."
+BACKUP_EMPTY="No backups exist on the system."
+SELECT_PLUGINS_CACHE="Which cache plugins will you use? "
+SELECT_PLUGINS_SEO="Which SEO Plugins do you use? "
+INPUT_WP_ADMIN="Enter the wp-admin account (Instant Writing, not starting. For example: hostvn: "
+INPUT_EMAIL="Enter your email:"
+WRONG_EMAIL="Email you entered is incorrect, please re-enter."
+WRONG_USERNAME="Username is not correct format, please re-enter."
+INPUT_SITE_NAME="Enter the website name: "
+SELECT_REMOTE="Select the Remote GG Drive you want to use [0 = Disable]: "
+INPUT_SELECT="Enter your choice: "
+WRONG_OPTION="Your choice is not correct. Please choose again."
