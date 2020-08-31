@@ -21,7 +21,7 @@ confirm_destroy(){
         if [[ "${promt_destroy}" =~ ^([yY])$ || "${promt_destroy}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -33,7 +33,7 @@ select_backup(){
         select=${entry///}
         dates+=("${select}")
     done
-    PS3="Nhap lua chon cua ban [0 = Thoat]: "
+    PS3="Enter your choice [0 = Exit]: "
     select date in "${dates[@]}"
     do
         date=${date}
@@ -48,7 +48,7 @@ choose_domain(){
         select=${entry///}
         domains+=("${select}")
     done
-    PS3="Nhap lua chon cua ban [0 = Thoat]: "
+    PS3="Enter your choice [0 = Exit]: "
     select domain in "${domains[@]}"
     do
         domain=${domain}
@@ -60,19 +60,19 @@ _run(){
     select_backup
     if [ -z "${date}" ]; then
         clear
-        printf "%s\n" "${GREEN}Ban da huy xoa backup.${NC}"
+        printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
     else
         choose_domain
 
         if [ -z "${domain}" ]; then
             clear
-            printf "%s\n" "${GREEN}Ban da huy xoa backup.${NC}"
+            printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
         else
             rclone delete "${remote}":/"${IPADDRESS}"/"${date}"/"${domain}" --rmdirs > /dev/null  2>&1
             rclone cleanup "${remote}":"${IPADDRESS}" > /dev/null  2>&1
             rm -rf /home/backup/"${date}"/"${domain}"
             clear
-            printf "%s\n" "${GREEN}Xoa backup thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Xoa backup success.${NC}"
         fi
     fi
 }
@@ -88,7 +88,7 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
             select_remote
             if [ -z "${remote}" ]; then
                 clear
-                printf "%s\n" "${GREEN}Ban da huy xoa backup.${NC}"
+                printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
             else
                 _run
             fi
@@ -97,7 +97,7 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
         fi
     else
         clear
-        printf "%s\n" "${GREEN}Ban da huy xoa backup.${NC}"
+        printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
     fi
 else
     printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"

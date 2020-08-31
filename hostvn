@@ -60,38 +60,38 @@ if [[ "${OS_VER}" -eq 8 ]]; then
 fi
 
 # Set Lang
-OPTION_CHANGE_SSH="Ban co muon thay doi port SSH khong ? "
-OPTION_INST_PUREFTP="Ban co muon cai dat PURE-FTPD (Quan ly FTP) khong ? "
-OPTION_INST_AV="Ban co muon cai dat Clamav (Scan Malware) khong ? "
-OPTION_INST_MEMCACHED="Ban co muon cai dat Memcached khong ? "
-OPTION_INST_REDIS="Ban co muon cai dat Redis khong ? "
-ENTER_OPTION="Nhap vao lua chon cua ban: "
-SELECT_PHP="Hay lua chon phien ban PHP muon cai dat:"
-WRONG_PHP_OPTION="Lua chon cua ban khong chinh xac, vui long chon lai."
-SELECT_INST_PHP_2="Ban co muon cai dat phien ban PHP thu hai khong - Multiple PHP ?"
-ENTER_OPTION_PHP_2="Nhap vao lua chon cua ban [1-2]: "
-WRONG_PHP_SELECT_2="Ban nhap sai. Vui long nhap lai."
-INVALID_PHP2_OPTION="${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}"
-SELECT_PHP_2="Lua chon phien ban PHP thu hai ban muon su dung:"
-INST_MARIADB_ERR="Cai dat MariaDB that bai, vui long truy cap ${AUTHOR_CONTACT} de duoc ho tro."
-INST_NGINX_ERR="Cai dat Nginx that bai, vui long truy cap ${AUTHOR_CONTACT} de duoc ho tro."
-INST_PHP_ERR="Cai dat PHP that bai, vui long truy cap ${AUTHOR_CONTACT} de duoc ho tro."
-INST_PHP_ERR_2="Cai dat PHP 2 that bai, vui long truy cap ${AUTHOR_CONTACT} de duoc ho tro"
-INST_IGBINARY_ERR="Cai dat Igbinary that bai. Vui long cai dat lai: Igbinary, Php memcached ext, Phpredis."
-INST_MEMEXT_ERR="Cai dat Php memcached extension khong thanh cong. Vui long cai dat lai."
-INST_PHPREDIS_ERR="Cai dat  Phpredis khong thanh cong. Vui long cai dat lai."
-INST_IGBINARY_ERR_2="Cai dat Igbinary cho PHP 2 khong thanh cong. Vui long cai dat lai: Igbinary, Php memcached ext, Phpredis."
-INST_MEMEXT_ERR_2="Cai dat Php memcached extension cho PHP 2 khong thanh cong. Vui long cai dat lai."
-INST_PHPREDIS_ERR_2="Cai dat Phpredis cho PHP 2 khong thanh cong. Vui long cai dat lai."
-NGINX_NOT_WORKING="Nginx khong hoat dong."
-MARIADB_NOT_WORKING="MariaDB khong hoat dong."
-PUREFTP_NOT_WORKING="Pure-ftp khong hoat dong."
-PHP_NOT_WORKING="PHP-FPM khong hoat dong."
-LFD_NOT_WORKING="CSF khong hoat dong."
-LFD_NOT_WORKING="LFD khong hoat dong."
-LOGIN_NOTI1="Cam on ban da su dung dich vu cua ${AUTHOR}."
-LOGIN_NOTI2="Neu can ho tro vui long truy cap ${AUTHOR_CONTACT}"
-LOGIN_NOTI3="De mo menu ban go lenh sau:  hostvn"
+OPTION_CHANGE_SSH="Do you want to change the SSH port? "
+OPTION_INST_PUREFTP="Do you want to install PURE-FTPD (Manage FTP)? "
+OPTION_INST_AV="Do you want to install Clamav (Scan Malware)? "
+OPTION_INST_MEMCACHED="Do you want to install Memcached? "
+OPTION_INST_REDIS="Do you want to install Redis? "
+ENTER_OPTION="Enter your selection: "
+SELECT_PHP="Choose the PHP version you want to install:"
+WRONG_PHP_OPTION="Your choose is incorrect, please choose again."
+SELECT_INST_PHP_2="Do you want to install a second PHP version - Multiple PHP?"
+ENTER_OPTION_PHP_2="Enter your selection [1-2]: "
+WRONG_PHP_SELECT_2="You entered it wrong. Please re-enter."
+INVALID_PHP2_OPTION="${RED}Your choice is not correct. Please choose again.${NC}"
+SELECT_PHP_2="Choose the second PHP version you want to use:"
+INST_MARIADB_ERR="MariaDB installation failed, please visit ${AUTHOR_CONTACT} for assistance."
+INST_NGINX_ERR="Nginx installation failed, please visit ${AUTHOR_CONTACT} for assistance."
+INST_PHP_ERR="PHP installation failed, please visit ${AUTHOR_CONTACT} for assistance."
+INST_PHP_ERR_2="PHP 2 installation failed, please visit ${AUTHOR_CONTACT} for assistance"
+INST_IGBINARY_ERR="Install Igbinary to do it. Please reinstall: Igbinary, Php memcached ext, Phpredis."
+INST_MEMEXT_ERR="Installing Php memcached extension has not success. Please reinstall."
+INST_PHPREDIS_ERR="Phpredis installation is not success. Please reinstall."
+INST_IGBINARY_ERR_2="Installing Igbinary for PHP 2 was not success. Please reinstall: Igbinary, Php memcached ext, Phpredis."
+INST_MEMEXT_ERR_2="The installation of Php memcached extension for PHP 2 has not been successful. Please reinstall."
+INST_PHPREDIS_ERR_2="Installing Php Redis for PHP 2 has no success. Please reinstall"
+NGINX_NOT_WORKING="Nginx inactive."
+MARIADB_NOT_WORKING="MariaDB inactive."
+PUREFTP_NOT_WORKING="Pure-ftp inactive."
+PHP_NOT_WORKING="PHP-FPM inactive."
+LFD_NOT_WORKING="CSF inactive."
+LFD_NOT_WORKING="LFD inactive."
+LOGIN_NOTI1="Thank you for using this service ${AUTHOR}."
+LOGIN_NOTI2="If you need assistance please visit ${AUTHOR_CONTACT}"
+LOGIN_NOTI3="To open the menu, type the following command:  hostvn"
 
 # Random Port
 RANDOM_ADMIN_PORT=$(shuf -i 49152-57343 -n 1)
@@ -188,14 +188,14 @@ set_email(){
     clear
     while true
     do
-        read -r -p "Nhap vao email cua ban: " ADMIN_EMAIL
+        read -r -p "Enter your email: " ADMIN_EMAIL
         echo
         if [[ "${ADMIN_EMAIL}" =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$ ]];
         then
-            echo "Email cua ban la: ${ADMIN_EMAIL}."
+            echo "Your email is: ${ADMIN_EMAIL}."
             break
         else
-            echo "Email ban nhap khong chinh xac vui long nhap lai."
+            echo "Email you entered is incorrect, please re-enter."
         fi
     done
 }
@@ -221,12 +221,12 @@ ssh_login_noti(){
 # Option Install
 ############################################
 input_ip(){
-    echo "Nhap vao dia chi IP cua VPS. Bam Enter de script tu detect IP Public."
-    read -r -p "Nhap vao dia chi IP cua VPS: " IPADDRESS_NEW
+    echo "Enter the IP address of the VPS. Press Enter to the script automatically detect IP Public."
+    read -r -p "Enter the IP address of VPS: " IPADDRESS_NEW
     if [ -n "${IPADDRESS_NEW}" ] && valid_ip "${IPADDRESS_NEW}" ; then
         IPADDRESS=IPADDRESS_NEW
     else
-        printf "IP ban nhap khong chinh xac. Script se tu dong detect IP Public cua VPS."
+        printf "The IP you entered is incorrect. The script will automatically detect the VPS's Public IP."
     fi
 }
 
@@ -370,8 +370,8 @@ option_change_ssh_port(){
                 prompt_ssh="y";
                 SSH_PORT="8282";
                 sleep 1
-                printf "${RED}Port SSH moi là: 8282${NC}\n";
-                printf "${RED}Luu y: Voi Google Cloud cac ban can mo port 8282 trong tab VPC network${NC}\n";
+                printf "${RED}The new SSH port is: 8282${NC}\n";
+                printf "${RED}Note: With Google Cloud you need to open port 8282 in the tab VPC network${NC}\n";
                 sleep 1
                 break;;
             "No") prompt_ssh="n"; SSH_PORT="22" ; break;;
@@ -542,7 +542,7 @@ install_php_2(){
 check_duplicate_php(){
     if [[ "${PHP_VERSION_2}" == "${PHP_VERSION}" ]]; then
         MULTI_PHP="n"
-        echo "Phien ban PHP thứ 2 trung voi phien ban mac dinh. He thong se cai dat mot phien ban PHP."
+        echo "The second PHP version is the same as the original version."
     fi
 }
 
@@ -3766,7 +3766,7 @@ clear
 sleep 1
 
 printf "=========================================================================\n"
-printf "                              Cai dat thanh cong                         \n"
+printf "                              Cai dat success                         \n"
 printf "                 File luu thong tin: %s\n" "${FILE_INFO}"
 printf "          Neu can ho tro vui long truy cap %s\n" "${AUTHOR_CONTACT}"
 printf "==========================================================================\n"

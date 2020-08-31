@@ -25,21 +25,21 @@ set_var(){
 input(){
     while true
     do
-        echo "Username khong chua ky tu dac biet va dai 5 ky tu tro len."
-        read -r -p "Nhap vao user muon tao [0 = Thoat]: " ftp_user
+        echo "Username does not contain special characters and must be 5 characters in length."
+        read -r -p "Enter the user you want to create [0 = Exit]: " ftp_user
         echo
         if validate_user "${ftp_user}" || [ "${ftp_user}" == "0" ] ; then
             break
         else
             clear
-            printf "%s\n" "${RED}User khong dung dinh dang, vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}User is not in the correct format, please enter it again.${NC}"
         fi
     done
 
     if [ "${ftp_user}" != "0" ]; then
         ftp_pwd=$(gen_pass "$@")
-        echo "Nhap vao duong dan duoc phep truy cap. VD: /home/example, /home/example/example.com/public_html"
-        read -r -p "Nhap duong dan [0 = Thoat]: " ftp_path
+        echo "Click on the link allowed to access. For example: /home/example, /home/example/example.com/public_html"
+        read -r -p "Enter the path [0 = Exit]: " ftp_path
     fi
 }
 
@@ -66,15 +66,15 @@ _run(){
     set_var
 
     if if_pureftpd_user_exists "${ftp_user}"; then
-        ALERT=$(printf "%s\n" "${RED}User da ton tai.${NC}")
+        ALERT=$(printf "%s\n" "${RED}User already exist.${NC}")
     fi
 
     if [ "${ftp_path}" == "/" ]; then
-        ALERT=$(printf "%s\n" "${RED}Duong dan truy cap khong chinh xac.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Access path is incorrect.${NC}")
     fi
 
     if [[ ! -d "${ftp_path}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Duong dan truy cap ban nhap khong ton tai.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Access path does not exist.${NC}")
     fi
 
     if [[ -z "${ALERT}" ]]; then
@@ -93,17 +93,17 @@ pureftpd_status="$(pgrep -f pure-ftpd)"
 
 if [ -z "${pureftpd_status}" ]; then
     clear
-    printf "%s\n" "${RED}PURE-FTP khong hoat dong hoac chua duoc cai dat. Vui long kiem tra lai.${NC}"
+    printf "%s\n" "${RED}PURE-FTP does not work or is not installed. Please check back.${NC}"
 else
     select_domain
     if [ -z "${domain}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     else
         input "$@"
         if [[ "${ftp_user}" == "0" || "${ftp_path}" == "0" ]]; then
             clear
-            printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+            printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
         else
             _run
         fi

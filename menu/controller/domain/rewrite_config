@@ -15,9 +15,9 @@
 source /var/hostvn/menu/helpers/function
 
 set_ssl(){
-    echo "Ban dang su dung loai SSL nao ?"
-    PS3="Nhap vao lua chon cua ban: "
-    options=("Let's Encrypt" "SSL tra phi" "Chua cai SSL" "Cancel")
+    echo "What kind of SSL are you using?"
+    PS3="Enter your selection: "
+    options=("Let's Encrypt" "Premium SSL" "Not installed SSL" "Cancel")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -25,21 +25,21 @@ set_ssl(){
             "SSL tra phi") ssl="ssl_paid"; break;;
             "Chua cai SSL") ssl="no_ssl"; break;;
             "Cancel") ssl="0"; break;;
-            *) printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+            *) printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
         esac
     done
 
     if [[ "${ssl}" == "le" && ! -f "/etc/letsencrypt/live/${domain}/fullchain.pem" ]]; then
-        printf "%s\n" "${RED}Khong tim thay chung chi Let's Encrypt.${NC}"
-        printf "%s\n" "${RED}He thong se Rewirte vhost khong co SSL.${NC}"
+        printf "%s\n" "${RED}Can't find Let's Encrypt.${NC}"
+        printf "%s\n" "${RED}The system will Rewirte vhost without SSL.${NC}"
         ssl="no_ssl"
         sleep 3
     fi
 
     if [[ "${ssl}" == "ssl_paid" && ! -f "/etc/nginx/ssl/${domain}/fullchain.pem" ]]; then
-        printf "%s\n" "${RED}Khong tim thay chung chi SSL.${NC}"
-        printf "%s\n" "${RED}Hay dam bao chung chi cua ban duoc dat dung duong dan /etc/nginx/ssl/${domain}.${NC}"
-        printf "%s\n" "${RED}He thong se Rewirte vhost khong co SSL.${NC}"
+        printf "%s\n" "${RED}SSL certificate not found.${NC}"
+        printf "%s\n" "${RED}Make sure your certificate is in the correct path /etc/nginx/ssl/${domain}.${NC}"
+        printf "%s\n" "${RED}The system will Rewirte vhost without SSL.${NC}"
         ssl="no_ssl"
         sleep 3
     fi
@@ -214,7 +214,7 @@ _run(){
     set_ssl
     if [ "${ssl}" == "0" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac.${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
     else
         root="root /home/${username}/${domain}/public_html;"
         if [ "${SOURCE}" == "laravel" ]; then
@@ -240,9 +240,9 @@ _run(){
         restart_service
         clear
         echo ""
-        printf "%sRewrite Vhost thanh cong.%s\n" "${GREEN}" "${NC}"
+        printf "%sRewrite Vhost success.%s\n" "${GREEN}" "${NC}"
         if [[ "${SOURCE}" == "wordpress" ]]; then
-            printf "%s\n" "${GREEN}Luu y: Ban can cau hinh lai Plugins cache va Plugins Seo tai menu 7-7${NC}"
+            printf "%s\n" "${GREEN}Note: You need to reconfigure Plugins cache and Plugins Seo at the menu 7-7${NC}"
         fi
         echo ""
     fi
@@ -256,7 +256,7 @@ select_domain
 
 if [ -z "${domain}" ]; then
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac.${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
 else
     _run
 fi

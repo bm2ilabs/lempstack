@@ -20,7 +20,7 @@ confirm(){
         if [[ "${prompt_clamav}" =~ ^([yY])$ || "${prompt_clamav}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -47,7 +47,7 @@ install(){
             echo "DatabaseCustomURL http://cdn.malware.expert/malware.expert.fp"
         } >> /etc/freshclam.conf
         clear
-        printf "%s\n" "${GREEN}Cai dat ClamAV thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Cai dat ClamAV success.${NC}"
         echo ""
     fi
 }
@@ -58,7 +58,7 @@ if [[ "${prompt_clamav}" =~ ^([yY])$ ]];then
     install
 else
     clear
-    printf "%s\n" "${GREEN}Ban da huy cai dat ClamAV.${NC}"
+    printf "%s\n" "${GREEN}Ban da Cancel cai dat ClamAV.${NC}"
 fi
 
 menu_security

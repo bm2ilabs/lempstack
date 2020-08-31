@@ -25,20 +25,20 @@ set_cl(){
 set_cl
 
 printf "%s=============================%s\n" "${GREEN}" "${NC}"
-printf "%s        Quan ly Nginx        %s\n" "${GREEN}" "${NC}"
+printf "%s        Manage Nginx         %s\n" "${GREEN}" "${NC}"
 printf "%s=============================%s\n" "${GREEN}" "${NC}"
-printf "%sPhien ban : %s%s\n" "${GREEN}" "${nginx_v}" "${NC}"
+printf "%sVersion : %s%s\n" "${GREEN}" "${nginx_v}" "${NC}"
 printf "%s=============================%s\n" "${GREEN}" "${NC}"
-printf "%sTrang thai: %s%s\n" "${GREEN}" "${nginx_status}" "${NC}"
+printf "%sStatus: %s%s\n" "${GREEN}" "${nginx_status}" "${NC}"
 printf "%s=============================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Khoi đong lai nginx%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Kiem tra cau hinh Nginx%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Cap nhat Nginx%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Restart nginx%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Test configuration Nginx%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Update Nginx%s\n" "${GREEN}" "${NC}"
     printf "%s =========================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
 
     if [ -z "${CHOICE}" ]
     then
@@ -48,11 +48,11 @@ do
     case ${CHOICE} in
         1)
             clear
-            printf "%s\n" "${RED}Dang khoi đong lai...${NC}"
+            printf "%s\n" "${RED}Trying Resterting...${NC}"
             sleep 1
             systemctl restart nginx
             clear
-            printf "%s\n" "${GREEN}Khoi đong lai Nginx thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Nginx restarted successfully.${NC}"
             sleep 1
             echo
             menu_nginx
@@ -66,15 +66,15 @@ do
             menu_nginx
             ;;
         3)
-            printf "%s\n" "${RED}Chuan bi cap nhat...${NC}"
+            printf "%s\n" "${RED}Prepare for the update...${NC}"
             sleep 1
             yum -y update nginx
             clear
-            printf "%s\n" "${GREEN}Hoan tat cap nhat.${NC}"
+            printf "%s\n" "${GREEN}Complete the update.${NC}"
             echo
             menu_nginx
             ;;
         0) clear; menu_lemp ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

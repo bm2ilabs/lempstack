@@ -24,12 +24,12 @@ set_var(){
 backup_confirm(){
     while true
     do
-        read -r -p "Ban co muon backup du lieu truoc khi update plugins khong? (y/n) " promt_backup
+        read -r -p "Do you want to backup data before updating plugins? (y/n) " promt_backup
         echo
         if [[ "${promt_backup}" =~ ^([yY])$ || "${promt_backup}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n" "${RED}Gia tri ban nhap khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}The value you entered is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -70,7 +70,7 @@ _run(){
         _update_plugins
         restart_service
         clear
-        printf "%s\n" "${GREEN}Update plugins thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Update plugins success.${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"
@@ -85,6 +85,6 @@ if [ -n "${domain}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 wp_menu_plugins

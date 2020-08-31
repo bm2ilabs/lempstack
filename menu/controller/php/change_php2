@@ -44,11 +44,11 @@ set_var(){
 
 check_duplicate_php(){
     if [[ "${php2_new}" == "${php2_version}" ]]; then
-        ALERT=$(printf "${RED}Phien ban PHP 2 ban muon thay giong phien ban PHP 2 hien tai. Huy cai dat.${NC}\n")
+        ALERT=$(printf "${RED}Phien ban PHP 2 ban muon thay giong phien ban PHP 2 hien tai. Cancel cai dat.${NC}\n")
     fi
 
     if [[ "${php2_new}" == "${php1_version}" ]]; then
-        ALERT=$(printf "${RED}Phien ban PHP 2 ban chon giong phien ban PHP 1. Huy cai dat.${NC}\n")
+        ALERT=$(printf "${RED}Phien ban PHP 2 ban chon giong phien ban PHP 1. Cancel cai dat.${NC}\n")
     fi
 }
 
@@ -58,8 +58,8 @@ select_php_ver(){
         clear
         while true
         do
-            printf "Lua chon phien ban PHP thu 2\n"
-            PS3="Nhap vao lua chon cua ban: "
+            printf "Choosephien ban PHP thu 2\n"
+            PS3="Enter your selection: "
             select opt2 in "${PHP_LIST[@]}"
             do
                 case $opt2 in
@@ -72,7 +72,7 @@ select_php_ver(){
                 break
             else
                 clear
-                printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}"
+                printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}"
             fi
         done
     fi
@@ -336,7 +336,7 @@ _run(){
             write_info
 
             clear
-            printf "%s\n" "${GREEN}Thay doi phien ban PHP thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Thay doi phien ban PHP success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"
@@ -351,6 +351,6 @@ confirm
 if [[ "${prompt_php2}" =~ ^([yY])$ ]]; then
     _run
 else
-    printf "%s\n" "${GREEN}Ban da huy thay doi phien ban PHP 2.${NC}"
+    printf "%s\n" "${GREEN}Ban da Cancel thay doi phien ban PHP 2.${NC}"
 fi
 menu_php

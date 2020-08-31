@@ -38,7 +38,7 @@ update(){
     sh update
     rm -rf update
     clear
-    printf "%s\n" "${GREEN}Update ${AUTHOR} Script thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Update ${AUTHOR} Script success.${NC}"
 }
 
 _run(){
@@ -52,7 +52,7 @@ _run(){
             update
         else
             clear
-            printf "%s\n" "${GREEN}Ban da huy update ${AUTHOR} Script${NC}"
+            printf "%s\n" "${GREEN}Ban da Cancel update ${AUTHOR} Script${NC}"
         fi
 
     else

@@ -13,16 +13,16 @@
 CHOICE=1
 
 printf "%s=========================================%s\n" "${GREEN}" "${NC}"
-printf "%s         Cau hinh plugin cache           %s\n" "${GREEN}" "${NC}"
+printf "%s         Configure the cache plugin      %s\n" "${GREEN}" "${NC}"
 printf "%s=========================================%s\n" "${GREEN}" "${NC}"
 echo
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Bat cau hinh plugins cache%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Xoa cau hinh plugins cache%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Add configured cache plugins%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Delete configuration cache plugins%s\n" "${GREEN}" "${NC}"
     printf "%s ========================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -32,6 +32,6 @@ do
         1) clear; add_plugins_cache ;;
         2) clear; remove_plugins_cache ;;
         0) clear; wp_menu_advanced ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

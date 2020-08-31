@@ -27,7 +27,7 @@ input(){
     clear
     while true
     do
-        read -r -p "Nhap vao port ban muon đoi [0 = Thoat]: " port_new
+        read -r -p "Nhap vao port ban muon đoi [0 = Exit]: " port_new
         echo
         if [[ ${port_new} =~ ^-?[0-9]+$ ]]; then
             break
@@ -56,7 +56,7 @@ check_port(){
     fi
 
     if check_port_exists "${port_new}"; then
-        ALERT=$(printf "%s\n" "${RED}Port da duoc su dung. Huy thay doi port SSH.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Port da duoc su dung. Cancel thay doi port SSH.${NC}")
     fi
 }
 
@@ -81,7 +81,7 @@ _change_port(){
     csf -x
     csf -e
     clear
-    printf "%s\n" "${GREEN}Da thay đoi Port SSH sang ${port_new} thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Da thay đoi Port SSH sang ${port_new} success.${NC}"
 }
 
 _run(){
@@ -100,7 +100,7 @@ port_new=""
 input
 if [[ "${port_new}" == "0" ]]; then
     clear
-    printf "%s\n" "${RED}Ban da chon huy thay doi Port.${NC}"
+    printf "%s\n" "${RED}Ban da chon Cancel thay doi Port.${NC}"
 else
     _run
 fi

@@ -20,7 +20,7 @@ set_var(){
     db_name=$(grep -w "db_name" "${USER_DIR}/.${domain}.conf" | cut -f2 -d'=');
 
     if [[ -z "${db_name}" ]]; then
-        read -r -p "Nhap vao ten Database muon sao luu: " db_name
+        read -r -p "Enter the name Database you want to copy: " db_name
     fi
 }
 
@@ -32,17 +32,17 @@ _backup(){
     cd_dir /home/backup/"${CURRENT_DATE}"/"${domain}"
     mysqldump -uadmin -p"${mysql_pwd}" "${db_name}" > "${db_name}".sql
     clear
-    printf "%s\n" "${GREEN}Sao luu du lieu thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Backup success data.${NC}"
 }
 
 _run(){
     set_var
     if if_is_wordpress "$username" "$domain"; then
-        printf "%s\n" "${RED}Website su dung WordPress. Vui long su dung Menu quan ly Wordpress de backup.${NC}"
+        printf "%s\n" "${RED}Website using WordPress. Please use the Wordpress Management Menu for backup.${NC}"
     else
         if ! if_db_exists "${db_name}" ;
         then
-            ALERT=$(printf "%s\n" "${RED}Database khong ton tai.${NC}")
+            ALERT=$(printf "%s\n" "${RED}Database does not exist.${NC}")
         fi
 
         if [ -z "${ALERT}" ]; then
@@ -60,7 +60,7 @@ select_domain
 
 if [ -z "${domain}" ]; then
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac.${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
 else
     _run
 fi

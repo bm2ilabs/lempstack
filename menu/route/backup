@@ -13,18 +13,18 @@
 CHOICE=1
 
 printf "%s=====================================%s\n" "${GREEN}" "${NC}"
-printf "%s     Sao luu/Khoi phuc du lieu       %s\n" "${GREEN}" "${NC}"
+printf "%s     Backup / Restore data           %s\n" "${GREEN}" "${NC}"
 printf "%s=====================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Sao luu du lieu (Local)%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Khoi phuc du lieu (Local)%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Xoa ban sao luu (Local)%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Khoi phuc/Sao luu voi Google Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Thiet lap backup tu dong%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Data backup (Local)%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Data recovery (Local)%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Delete backup (Local)%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Restore / Backup with Google Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Set up automatic backup%s\n" "${GREEN}" "${NC}"
     printf "%s ====================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -37,6 +37,6 @@ do
         4) clear; menu_ggdrive ;;
         5) clear; menu_cronjob ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

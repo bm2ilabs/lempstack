@@ -51,7 +51,7 @@ select_domain(){
             domain=${domain//.conf}
             domains+=("${domain}")
         done
-        PS3="${INPUT_SELECT} [0 = Thoat] "
+        PS3="${INPUT_SELECT} [0 = Exit] "
         select opt in "${domains[@]}"
         do
             domain=$opt
@@ -164,7 +164,7 @@ list_backup(){
         done
 
         if [ -n "${date}" ]; then
-            echo "Chon ten mien muon khoi phuc [0 = Thoat]: "
+            echo "Chon ten mien muon khoi phuc [0 = Exit]: "
             domains=()
             cd_dir /home/backup/"${date}"
             for entry in * ; do
@@ -233,7 +233,7 @@ select_plugin_seo(){
 wp_auto_install_info(){
     while true
     do
-        echo "Username khong chua ky tu dac biet va dai 5 ky tu tro len."
+        echo "Username does not contain special characters and must be 5 characters in length."
         read -r -p "${INPUT_WP_ADMIN}" admin_user
         LEN=${#admin_user}
         echo

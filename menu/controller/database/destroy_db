@@ -14,11 +14,11 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s============%s" "${GREEN}" "${NC}"
-printf "%sXoa database%s" "${GREEN}" "${NC}"
+printf "%sDelete the database%s" "${GREEN}" "${NC}"
 printf "%s============%s" "${GREEN}" "${NC}"
 
 list_db(){
-    echo "Danh sach Database tren VPS"
+    echo "Database list on VPS"
     #https://stackoverflow.com/a/50053525
     #https://dba.stackexchange.com/a/69667
     mysql -e "SHOW DATABASES WHERE \`Database\` NOT IN('information_schema', 'phpmyadmin', 'mysql', 'performance_schema')"
@@ -28,25 +28,25 @@ list_db(){
 input(){
     while true
     do
-        echo "Username khong chua ky tu dac biet va dai 5 ky tu tro len."
-        read -r -p "Nhap ten database [0 = Thoat]: " db_name
+        echo "The username is not unique and has 5-year-old password."
+        read -r -p "Enter the database name [0 = Exit]: " db_name
         echo
         if validate_user "${db_name}"; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 
     if [ "${db_name}" != "0" ]; then
         while true
         do
-            read -r -p "Xac nhan xoa database? (y/n): " prompt_destroy
+            read -r -p "Confirm database delete? (y/n): " prompt_destroy
             echo
             if [[ "${prompt_destroy}" =~ ^([yY])$ || "${prompt_destroy}" =~ ^([nN])$ ]]; then
                 break
             else
-                printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+                printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
             fi
         done
     fi
@@ -54,14 +54,14 @@ input(){
 
 delete_db(){
     if [[ "${prompt_destroy}" =~ ^([yY])$ ]]; then
-        printf "%s\n" "${GREEN}Dang tien hanh xoa database...${NC}"
+        printf "%s\n" "${GREEN}Delete database is in progress...${NC}"
         sleep 1
         mysql -e "DROP DATABASE IF EXISTS ${db_name}"
         clear
-        printf "%s\n" "${GREEN}Xoa database thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Delete database success.${NC}"
     else
         clear
-        printf "%s\n" "${RED}Ban da huy xoa database.${NC}"
+        printf "%s\n" "${RED}You have Canceled delete database.${NC}"
     fi
 }
 
@@ -73,7 +73,7 @@ _run(){
         delete_db
     else
         clear
-        printf "%s\n" "${RED}Ban da huy xoa database.${NC}"
+        printf "%s\n" "${RED}Ban da Cancel xoa database.${NC}"
     fi
 
 }

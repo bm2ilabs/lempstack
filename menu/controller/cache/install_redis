@@ -15,12 +15,12 @@ source /var/hostvn/menu/helpers/variable_php
 confirm(){
     while true
     do
-        read -r -p "Ban muon cai dat Redis ? (y/n) " prompt_redis
+        read -r -p "Do you want to install Redis ? (y/n) " prompt_redis
         echo
         if [[ "${prompt_redis}" =~ ^([yY])$ || "${prompt_redis}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -50,10 +50,10 @@ _run(){
         install
         inst_redisdadmin
         clear
-        printf "%s\n" "${GREEN}Cai dat Redis thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Installation of Redis has completed.${NC}"
     else
         clear
-        printf "%s\n" "${RED}Redis da duoc cai dat truoc do roi.${NC}"
+        printf "%s\n" "${RED}Redis is already installed.${NC}"
     fi
 }
 
@@ -63,7 +63,7 @@ if [[ "${prompt_redis}" =~ ^([yY])$ ]];then
     _run
 else
     clear
-    printf "%sBan da huy cai dat Redis.%s\n" "${GREEN}" "${NC}"
+    printf "%sYou did not install Redis.%s\n" "${GREEN}" "${NC}"
 fi
 
 menu_cache

@@ -22,30 +22,30 @@ set_var(){
 input(){
     while true
     do
-        read -r -p "Nhap vao port ban muon mo [0 = Thoat]: " new_port
+        read -r -p "Enter the port you want to open [0 = Exit]: " new_port
         echo
         if [[ "${new_port}" =~ ^[0-9]+$ ]]; then
             break
         else
             clear
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
 
 validate_port(){
     if [[ "${new_port}" == "${ssh_port}" || "${new_port}" == "${ftp_port}" || "${new_port}" == "${csf_port}" || "${new_port}" == "${admin_port}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc mo.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Your selected port has been opened.${NC}")
     fi
 
     check_se=$(semanage port -l | grep "${new_port}")
     if [[ "${new_port}" == "22" || -n  "${check_se}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc mo.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Your selected port has been opened.${NC}")
     fi
 
     string=$(grep -rnw "/etc/csf/csf.conf" -e "${new_port}")
     if [[ -n "${string}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc mo.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Your selected port has been opened.${NC}")
     fi
 }
 
@@ -53,7 +53,7 @@ _run(){
     set_var
     input
     if [ "${new_port}" = "0" ]; then
-        printf "%s\n" "${RED}Huy mo Port.${NC}"
+        printf "%s\n" "${RED}Cancel open Port.${NC}"
     else
         validate_port
         if [ -z "${ALERT}" ]; then
@@ -61,7 +61,7 @@ _run(){
             csf -x
             csf -e
             clear
-            printf "%s\n" "${GREEN}Mo port thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Open Port success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"

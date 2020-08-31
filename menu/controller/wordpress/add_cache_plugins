@@ -98,20 +98,20 @@ _run(){
         check_exists=$(grep -rnw "${VHOST_DIR}/${domain}.conf" -e "${entry}")
         if [[ -n "${check_exists}" ]]; then
             if [ "${entry}" == "${plugin_cache}" ]; then
-                ALERT=$(printf "%s\n" "${RED}Ban da cau hinh plugins cache ${entry} roi.${NC}")
+                ALERT=$(printf "%s\n" "${RED}You have configured cache plugins ${entry} already.${NC}")
             else
-                ALERT=$(printf "%s\n" "${RED}Ban hien dang cau hinh plugins cache ${entry}. Vui long xoa cau hinh cu truoc.${NC}")
+                ALERT=$(printf "%s\n" "${RED}You are currently configuring cache plugins ${entry}. Please delete the old profile first.${NC}")
             fi
             break
         fi
     done
 
     if [[ ! -d "/home/${user}/${domain}/public_html/wp-content" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Website khong su dung WordPress.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Website does not use WordPress.${NC}")
     fi
 
     if [[ "${plugin_cache}" == "wprocket" && ! -f "/home/${user}/${domain}/public_html/wp-config.php" ]]; then
-        ALERT=$(printf "%s\n" "${RED}File wp-config.php khong ton tai.${NC}")
+        ALERT=$(printf "%s\n" "${RED}File wp-config.php does not exist.${NC}")
     fi
 
     if [[ -z "${ALERT}" ]]; then
@@ -132,7 +132,7 @@ _run(){
 
         restart_service
         clear
-        printf "%s\n" "${GREEN}Cau hinh Nginx voi plugin cache ${plugin_cache} thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Configure Nginx with the cache plugin ${plugin_cache} success.${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"
@@ -146,6 +146,6 @@ if [ -n "${domain}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 wp_plugin_cache

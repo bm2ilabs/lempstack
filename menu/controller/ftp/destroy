@@ -16,8 +16,8 @@ source /var/hostvn/menu/helpers/function
 input(){
     while true
     do
-        echo "Username khong chua ky tu dac biet va dai 5 ky tu tro len."
-        read -r -p "Nhap vao user muon xoa [0 = Thoat]: " ftp_user
+        echo "Username does not contain special characters and must be 5 characters in length."
+        read -r -p "Nhap vao user muon xoa [0 = Exit]: " ftp_user
         echo
         if validate_user "${ftp_user}" || [ "${ftp_user}" == "0" ]; then
             break
@@ -37,13 +37,13 @@ _delete(){
 _run(){
     if [[ -f "/etc/pure-ftpd/pureftpd.passwd" ]]; then
         if ! if_pureftpd_user_exists "${ftp_user}"; then
-            ALERT=$(printf "%s\n" "${RED}FTP User khong ton tai.${NC}")
+            ALERT=$(printf "%s\n" "${RED}FTP User does not exist.${NC}")
         fi
 
         if [[ -z "${ALERT}" ]]; then
             _delete
             clear
-            printf "%s\n" "${GREEN}Xoa FTP User thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Xoa FTP User success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"
@@ -65,7 +65,7 @@ else
     input
     if [ "${ftp_user}" == "0" ]; then
         clear
-        printf "%s\n" "${RED}Ban da huy hanh dong.${NC}"
+        printf "%s\n" "${RED}Ban da Cancel hanh dong.${NC}"
     else
         _run
     fi

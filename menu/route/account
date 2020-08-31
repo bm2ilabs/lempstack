@@ -12,18 +12,18 @@
 
 CHOICE=1
 
-printf "%s================================%s\n" "${GREEN}" "${NC}"
-printf "  %sKiem tra thong tin tai khoan%s\n  " "${GREEN}" "${NC}"
+printf "%s=================================%s\n" "${GREEN}" "${NC}"
+printf "%s  Check account information      %s\n  " "${GREEN}" "${NC}"
 printf "%s=================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Thong tin dang nhap Admin Tool%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Thong tin dang nhap phpMyAdmin%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Kiem tra SSH Port%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Thong tin theo website%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Admin Tool login information%s\n" "${GREEN}" "${NC}"
+    printf "%s2. PhpMyAdmin credentials%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Test SSH Port%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Information by website%s\n" "${GREEN}" "${NC}"
     printf "%s ================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
 
     if [ -z "${CHOICE}" ]
     then
@@ -36,6 +36,6 @@ do
         3) clear; ssh_info ;;
         4) clear; user_info ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

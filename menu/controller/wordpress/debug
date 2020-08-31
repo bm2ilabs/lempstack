@@ -25,18 +25,18 @@ _run(){
             wp config set WP_DEBUG false --raw --allow-root
             restart_service
             clear
-            printf "%s\n" "${GREEN}Tat Debug mode thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Disable Debug mode success.${NC}"
             echo ""
         else
             wp config set WP_DEBUG true --raw --allow-root
             restart_service
             clear
-            printf "%s\n" "${GREEN}Bat Debug mode thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Enable Debug mode success.${NC}"
             echo ""
         fi
     else
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     fi
 }
 

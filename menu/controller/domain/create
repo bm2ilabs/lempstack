@@ -17,7 +17,7 @@ source /var/hostvn/menu/helpers/function
 source /var/hostvn/menu/helpers/variable_php
 
 printf "%s===============%s\n" "${GREEN}" "${NC}"
-printf "%sThem domain moi%s\n" "${GREEN}" "${NC}"
+printf "%sAdd a new domain%s\n" "${GREEN}" "${NC}"
 printf "%s===============%s\n" "${GREEN}" "${NC}"
 echo ""
 
@@ -25,7 +25,7 @@ input(){
     false
     while [ $? -eq 1 ]
     do
-        read -r -p "Nhap domain (Khong có www) [0 = Thoat]: " domain
+        read -r -p "Enter domain (No www)[0 = Exit]: " domain
         if [ "${domain}" == "0" ]; then
             domain=0
             break
@@ -36,12 +36,12 @@ input(){
                 "${BASH_DIR}"/menu/validate/check_value domain "${domain}"
                 if [[ $? -eq 1 ]]; then
                     clear
-                    printf "%s\n" "${RED}Ten mien ban nhap khong chinh xac vui long nhap lai.${NC}"
+                    printf "%s\n" "${RED}The name you entered is not correct, please re-enter.${NC}"
                     false
                 fi
             else
                 clear
-                printf "%s\n" "${RED}Ten mien ban nhap khong chinh xac vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}The name you entered is not correct, please re-enter.${NC}"
                 false
             fi
         fi
@@ -77,8 +77,8 @@ set_php_version(){
 select_php(){
     set_php_version
 
-    echo "Lua chon phien ban PHP ban muon su dung"
-    PS3='Nhap lua chon cua ban (1-2): '
+    echo "Choose the PHP version you want to use"
+    PS3='Enter your choice (1-2): '
     options=("${php1}" "${php2}" "Cancel")
     select opt in "${options[@]}"
     do
@@ -86,22 +86,22 @@ select_php(){
             "${php1}") php_mode="1"; break;;
             "${php2}") php_mode="2"; break;;
             "Cancel") php_mode="0"; break;;
-            *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai.${NC}";;
+            *) printf "%s\n" "${RED}You entered incorrectly, please re-enter.${NC}";;
         esac
     done
 }
 
 wp_auto_install_confirm(){
     promtp_inst_wp="n"
-    echo "Ban co muon tu đong cai dat WordPress moi khong ?"
-    PS3='Nhap lua chon cua ban (1-2): '
+    echo "Do you want to complete a new WordPress installation?"
+    PS3='Enter your choice (1-2): '
     options=("Yes" "No")
     select opt in "${options[@]}"
     do
         case $opt in
             "Yes") promtp_inst_wp="y"; break;;
             "No") promtp_inst_wp="n"; break;;
-            *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai.${NC}";;
+            *) printf "%s\n" "${RED}You entered incorrectly, please re-enter.${NC}";;
         esac
     done
 }
@@ -348,7 +348,7 @@ END
 show_info(){
     clear
     echo ""
-    printf "Ban đa them domain thanh cong. Hay luu lai thong tin de su dung\n"
+    printf "You have created domain success. Save the information for use\n"
     echo   "---------------------------------------------------------------"
     printf "* Domain                     : %s\n" "${domain}"
     printf "* DB_Name                    : %s\n" "${db_name}"
@@ -362,8 +362,8 @@ show_info(){
     fi
     printf "* Public_html                : %s\n" "/home/${username}/${domain}/public_html"
     if [ "${promtp_inst_wp}" = "y" ]; then
-    printf "* User dang nhap wp-admin    : %s\n" "${admin_user}"
-    printf "* Mat khau dang nhap wp-admin: %s\n" "${admin_pwd}"
+    printf "* User login wp-admin    : %s\n" "${admin_user}"
+    printf "* Login registration wp-admin: %s\n" "${admin_pwd}"
     fi
     echo   "---------------------------------------------------------------"
 }

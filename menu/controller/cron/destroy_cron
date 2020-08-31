@@ -11,8 +11,8 @@
 ######################################################################
 
 select_cron(){
-    echo "Lua chon Cronjob muon xoa ?"
-    PS3='Nhap lua chon cua ban (1-4): '
+    echo "Choose Cronjob want to delete?"
+    PS3='Enter your choice (1-4): '
     options=("Cronjob Auto Renew Let's Encrypt" "Cronjob auto backup local" "Cronjob auto backup Google Drive" "Cancel" )
     select opt in "${options[@]}"
     do
@@ -21,7 +21,7 @@ select_cron(){
             "Cronjob auto backup local") cron="backup_local"; break;;
             "Cronjob auto backup Google Drive") cron="backup_ggdrive"; break;;
             "Cancel") cron="0"; break;;
-            *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai.${NC}";;
+            *) printf "%s\n" "${RED}You entered incorrectly, please re-enter.${NC}";;
         esac
     done
 }
@@ -34,11 +34,11 @@ _run(){
     select_cron
 
     if [ "${cron}" == "0" ]; then
-        printf "%s\n" "${RED}Huy xoa cronjob.${NC}"
+        printf "%s\n" "${RED}Cancel erase cronjob.${NC}"
     else
         destroy_cronjob
         clear
-        printf "%s\n" "${GREEN}Xoa Cronjob thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Erase Cronjob success.${NC}"
         echo ""
     fi
 }

@@ -16,14 +16,14 @@ source /var/hostvn/menu/helpers/function
 input(){
     while true
     do
-        echo "Username khong chua ky tu dac biet va dai 5 ky tu tro len."
-        read -r -p "Nhap vao user muon doi mat khau [0 = Thoat]: " ftp_user
+        echo "Username does not contain special characters and must be 5 characters in length."
+        read -r -p "Enter the user you want to change the password for [0 = Exit]: " ftp_user
         echo
         if validate_user "${ftp_user}"; then
             break
         else
             clear
-            printf "%s\n" "${RED}User khong dung dinh dang, vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}User does not exist, please re-enter.${NC}"
         fi
     done
 
@@ -49,21 +49,21 @@ EOF
 _run(){
     if [[ -f "/etc/pure-ftpd/pureftpd.passwd" ]]; then
         if ! if_pureftpd_user_exists "${ftp_user}"; then
-            ALERT=$(printf "%s\n" "${RED}FTP User khong ton tai.${NC}")
+            ALERT=$(printf "%s\n" "${RED}FTP User does not exist.${NC}")
         fi
 
         if [[ -z "${ALERT}" ]]; then
             _change_pass
             clear
-            printf "%s\n" "${GREEN}Doi password FTP thanh cong.${NC}"
-            printf "%s\n" "${GREEN}Mat khau moi la:${NC} ${RED}${ftp_pwd}${NC} "
+            printf "%s\n" "${GREEN}Change password FTP success.${NC}"
+            printf "%s\n" "${GREEN}The new password is:${NC} ${RED}${ftp_pwd}${NC} "
         else
             clear
             printf "%s\n" "${ALERT}"
         fi
     else
         clear
-        printf "%s\n" "${RED}Khong co user FTP nao ton tai tren VPS.${NC}"
+        printf "%s\n" "${RED}No FTP users exist on VPS.${NC}"
     fi
 }
 
@@ -73,12 +73,12 @@ pureftpd_status="$(pgrep -f pure-ftpd)"
 
 if [ -z "${pureftpd_status}" ]; then
     clear
-    printf "%s\n" "${RED}PURE-FTP khong hoat dong hoac chua duoc cai dat. Vui long kiem tra lai.${NC}"
+    printf "%s\n" "${RED}PURE-FTP is not working or is not installed. Please check again.${NC}"
 else
     input "$@"
     if [ "${ftp_user}" == "0" ]; then
         clear
-        printf "%s\n" "${RED}Ban da huy hanh dong.${NC}"
+        printf "%s\n" "${RED}You have Canceled the action.${NC}"
     else
         _run
     fi

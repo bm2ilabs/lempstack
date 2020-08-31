@@ -14,7 +14,7 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%sThay đoi port Admin%s\n" "${GREEN}" "${NC}"
+printf "%sChange the Admin port%s\n" "${GREEN}" "${NC}"
 printf "%s===================%s\n" "${GREEN}" "${NC}"
 
 set_var(){
@@ -30,39 +30,39 @@ input(){
     clear
     while true
     do
-        read -r -p "Nhap vao port ban muon đoi [0 = Thoat]: " new_port
+        read -r -p "Enter the port you want to use [0 = Exit]: " new_port
         if [[ ${new_port} =~ ^-?[0-9]+$ ]]; then
             break
         else
-            printf "%s\n" "${RED}Port khong dung dinh dang, vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}Port is incorrect format, please re-enter.${NC}"
         fi
     done
 }
 
 check_port(){
     if [ -z "${new_port}" ]; then
-        ALERT=$(printf "%s\n" "${RED}Ban chua nhap Port.${NC}")
+        ALERT=$(printf "%s\n" "${RED}You have not entered Port.${NC}")
     fi
 
     if [[ "${new_port}" == "${current_port}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban nhap trung vui Port Admin hien tai.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Port you enter the current Port Admin inclusions.${NC}")
     fi
 
     if [[ "${new_port}" == "${ssh_port}" || "${new_port}" == "${csf_port}" || "${new_port}" == "${ftp_port}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc su dung. Vui long chon port khac.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The port you selected is already in use. Please select another port.${NC}")
     fi
 
     if [[ "${new_port}" == "22" || "${new_port}" == "11211" || "${new_port}" == "6379" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc su dung. Vui long chon port khac.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The port you selected is already in use. Please select another port.${NC}")
     fi
 
     if check_port_exists "${ftp_port}"; then
-        ALERT=$(printf "%s\n" "${RED}Port da duoc su dung. Huy thay doi port SSH.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Port is already in use. Please change the SSH port.${NC}")
     fi
 }
 
 _change_port(){
-    echo "Dang tien hanh thay đoi port SSH..."
+    echo "Register with SSH port ..."
    	echo ""
    	sleep 1
     sed -i "s/,${current_port}/,${new_port}/g" /etc/csf/csf.conf
@@ -72,7 +72,7 @@ _change_port(){
     csf -x
     csf -e
     clear
-    printf "%s\n" "${GREEN}Da thay đoi Port Admin sang ${new_port} thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Changed the Port Admin to ${new_port} success.${NC}"
 }
 
 _run(){
@@ -91,7 +91,7 @@ ALERT=""
 input
 if [[ "${new_port}" == "0" ]]; then
     clear
-    printf "%s\n" "${RED}Ban da chon huy thay doi Port.${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the Port changes.${NC}"
 else
     _run
 fi

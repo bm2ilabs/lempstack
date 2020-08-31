@@ -14,16 +14,16 @@
 CHOICE=1
 
 printf "%s======================%s\n" "${GREEN}" "${NC}"
-printf "     %sQuan ly SSH%s     \n" "${GREEN}" "${NC}"
-printf "     %sPort SSH: %s%s    \n" "${GREEN}" "${ssh_port}" "${NC}"
+printf "     %sSSH management   %s\n" "${GREEN}" "${NC}"
+printf "     %sSSH Port: %s     %s\n" "${GREEN}" "${ssh_port}" "${NC}"
 printf "%s======================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Doi port SSH%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Doi Password SSH%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Change the SSH port%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Change SSH Password%s\n" "${GREEN}" "${NC}"
     printf "%s ==================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
 
     if [[  -z "${CHOICE}" ]]
     then
@@ -38,6 +38,6 @@ do
             menu_ssh
             ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

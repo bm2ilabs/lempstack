@@ -229,7 +229,7 @@ _run(){
         create_ssl_vhost
         restart_nginx
         clear
-        printf "%sCau hinh SSL thanh cong.%s\n" "${GREEN}" "${NC}"
+        printf "%sCau hinh SSL success.%s\n" "${GREEN}" "${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"
@@ -244,7 +244,7 @@ if [ -n "${domain}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 
 menu_sslpaid

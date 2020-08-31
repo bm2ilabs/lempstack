@@ -30,7 +30,7 @@ _run(){
 
     if [ -z "${domain}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     else
         clear
         check_expired

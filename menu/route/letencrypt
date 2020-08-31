@@ -12,18 +12,18 @@
 
 CHOICE=1
 
-printf "%s========================+%s\n" "${GREEN}" "${NC}"
-printf "%s  Quan ly Let's Encrypt  %s\n" "${GREEN}" "${NC}"
-printf "%s========================+%s\n" "${GREEN}" "${NC}"
+printf "%s===========================+%s\n" "${GREEN}" "${NC}"
+printf "%s  Management Let's Encrypt  %s\n" "${GREEN}" "${NC}"
+printf "%s===========================+%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Them Let's Encrypt%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Add Let's Encrypt%s\n" "${GREEN}" "${NC}"
     printf "%s2. Let's Encrypt Wildcard%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Kiem tra thoi han%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Go bo Let's Encrypt%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Check out the deadline%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Removed Let's Encrypt%s\n" "${GREEN}" "${NC}"
     printf "%s ========================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -35,6 +35,6 @@ do
         3) clear; le_check_expired ;;
         4) clear; le_remove ;;
         0) clear; menu_ssl ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

@@ -21,7 +21,7 @@ update(){
     mv phpmemcachedadmin memcached
     chown -R nginx:nginx "${DEFAULT_DIR_TOOL}"/memcached
     clear
-    printf "%s\n" "${GREEN}Update Memcached Dashboard thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Update Memcached Dashboard with success.${NC}"
 }
 
 update

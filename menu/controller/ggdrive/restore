@@ -22,7 +22,7 @@ confirm_restore(){
         if [[ "${promt_restore}" =~ ^([yY])$ || "${promt_restore}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -43,7 +43,7 @@ select_backup(){
         select=${entry///}
         dates+=("${select}")
     done
-    PS3="Nhap lua chon cua ban [0 = Thoat]: "
+    PS3="Enter your choice [0 = Exit]: "
     select date in "${dates[@]}"
     do
         date=${date}
@@ -59,7 +59,7 @@ choose_domain(){
         select=${entry///}
         domains+=("${select}")
     done
-    PS3="Nhap lua chon cua ban [0 = Thoat]: "
+    PS3="Enter your choice [0 = Exit]: "
     select domain in "${domains[@]}"
     do
         domain=${domain}
@@ -96,7 +96,7 @@ select_db(){
     done
 
     echo "Chon file database muon khoi phuc"
-    PS3="Nhap vao lua chon cua ban [0 = Thoat]: "
+    PS3="Enter your selection [0 = Exit]: "
     select opt in "${sql_files[@]}"
     do
         sql=$opt
@@ -112,20 +112,20 @@ _run(){
     select_backup
     if [ -z "${date}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy khoi phuc du lieu.${NC}"
+        printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
     else
         choose_domain
 
         if [ -z "${domain}" ]; then
             clear
-            printf "%s\n" "${RED}Ban da chon huy khoi phuc du lieu.${NC}"
+            printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
         else
             if [ ! -f "${USER_DIR}/.${domain}.conf"  ]; then
-                ALERT=$(printf "%s\n" "${RED}Ten mien nay khong ton tai tren VPS.${NC}")
+                ALERT=$(printf "%s\n" "${RED}Ten mien nay does not exist tren VPS.${NC}")
             else
                 set_var
                 if ! if_db_exists "${db_name}"; then
-                    ALERT=$(printf "%s\n" "${RED}Database khong ton tai.${NC}")
+                    ALERT=$(printf "%s\n" "${RED}Database does not exist.${NC}")
                 fi
             fi
 
@@ -136,14 +136,14 @@ _run(){
                 select_db
                 if [ -z "${sql}" ]; then
                     clear
-                    printf "%s\n" "${RED}Ban da chon huy khoi phuc du lieu.${NC}"
+                    printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
                 else
                     _restore_source
                     empty_db
                     _restore_db
                     rm -rf /home/backup/"${date}"/"${domain}"
                     clear
-                    printf "%s\n" "${GREEN}Khoi phuc du lieu thanh cong.${NC}"
+                    printf "%s\n" "${GREEN}Khoi phuc du lieu success.${NC}"
                 fi
             else
                 clear
@@ -165,7 +165,7 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
             select_remote
             if [ -z "${remote}" ]; then
                 clear
-                printf "%s\n" "${RED}Ban da chon huy khoi phuc du lieu.${NC}"
+                printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
             else
                 _run
             fi
@@ -174,7 +174,7 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
         fi
     else
         clear
-        printf "%s\n" "${RED}Ban da chon huy khoi phuc du lieu.${NC}"
+        printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
     fi
 else
     printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"

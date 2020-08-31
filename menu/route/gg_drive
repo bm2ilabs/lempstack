@@ -18,14 +18,14 @@ printf "%s=================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Thiet lap Google Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Backup len GG Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Khoi phuc du lieu tu GG Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Xoa du lieu tren GG Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Danh sach backup tren GG Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s6. Xoa Google Drive remote%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Set up Google Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Backup to GG Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Recover data from GG Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Clear data on GG Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Backup list on GG Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s6. Delete Google Drive remote%s\n" "${GREEN}" "${NC}"
     printf "%s ================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -39,6 +39,6 @@ do
         5) clear; ggdrive_list_backup ;;
 		    6) clear; ggdrive_del_remote ;;
         0) clear; menu_backup ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

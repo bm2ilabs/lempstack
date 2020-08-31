@@ -20,16 +20,16 @@ _run(){
     if [ -n "${check_yoast}" ]; then
         while true
         do
-            read -r -p "Phat hien cau hinh Yoast Seo. Ban co muon xoa cau hinh Yoast Seo khong ? (y/n) " del_yoast
+            read -r -p "Detecting the Yoast Seo configuration. Do you want to delete the Yoast Seo profile? (y/n) " del_yoast
             echo
             if [[ "${del_yoast}" =~ ^([yY])$ ]]; then
                 sed -i '/yoast_seo/d' "${VHOST_DIR}"/"${domain}".conf
                 break
             elif [[ "${del_yoast}" =~ ^([nN])$ ]]; then
-                ALERT=$(printf "%s\n" "${RED}Ban da chon khong xoa config Yoast Seo. Huy cau hinh Rank Math Seo.${NC}")
+                ALERT=$(printf "%s\n" "${RED}You have chosen not to delete the Yoast Seo config. Cancel the configuration of Rank Math Seo.${NC}")
                 break
             else
-                printf "%s\n" "${RED}Gia tri ban nhap khong chinh xac vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}The value you entered is not correct, please re-enter.${NC}"
             fi
         done
     fi
@@ -41,12 +41,12 @@ _run(){
             sed -i '/rank_math_seo/d' "${VHOST_DIR}"/"${domain}".conf
             echo "plugins_seo=" >> "${USER_DIR}"/."${domain}".conf
             restart_service
-            printf "%s\n" "${GREEN}Tat cau hinh Rank Math Seo thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Enable Configuration of Rank Math Seo success.${NC}"
         else
             echo "plugins_seo=rank_math_seo" >> "${USER_DIR}"/."${domain}".conf
             sed -i '/index.html/a include /etc/nginx/wordpress/rank_math_seo.conf;' "${VHOST_DIR}"/"${domain}".conf
             restart_service
-            printf "%s\n" "${GREEN}Bat cau hinh Rank Math Seo thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Disable Rank Math Seo success.${NC}"
         fi
     else
         printf "%s\n" "${ALERT}"
@@ -61,7 +61,7 @@ if [ -n "${domain}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 
 wp_menu_advanced

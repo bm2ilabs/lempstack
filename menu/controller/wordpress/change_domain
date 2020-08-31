@@ -30,7 +30,7 @@ input(){
     false
     while [ $? -eq 1 ]
     do
-        read -r -p "Nhap domain (Khong có www) [0 = Thoat]: " new_domain
+        read -r -p "Enter domain (No www) [0 = Exit]: " new_domain
         if [ "${new_domain}" == "0" ]; then
             new_domain=0
             break
@@ -41,12 +41,12 @@ input(){
                 "${BASH_DIR}"/menu/validate/check_value domain "${new_domain}"
                 if [[ $? -eq 1 ]]; then
                     clear
-                    printf "%s\n" "${RED}Ten mien ban nhap khong chinh xac vui long nhap lai.${NC}"
+                    printf "%s\n" "${RED}The domain name you entered is incorrect, please re-enter.${NC}"
                     false
                 fi
             else
                 clear
-                printf "%s\n" "${RED}Ten mien ban nhap khong chinh xac vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}The domain name you entered is incorrect, please re-enter.${NC}"
                 false
             fi
         fi
@@ -61,7 +61,7 @@ backup_confirm(){
         if [[ "${promt_backup}" =~ ^([yY])$ || "${promt_backup}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n" "${RED}Gia tri ban nhap khong chinh xac vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}The value you entered is not correct, please re-enter.${NC}"
         fi
     done
 }
@@ -113,7 +113,7 @@ _run(){
     check_wpconfig "${username}" "${domain}"
 
     if [[ "${domain}" == "${new_domain}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Ten mien moi cua ban giong ten mien cu. Huy thay doi ten mien.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Ten mien moi cua ban giong ten mien cu. Cancel thay doi ten mien.${NC}")
     fi
 
     if [ -z "${ALERT}" ]; then
@@ -128,7 +128,7 @@ _run(){
         fi
         restart_service
         clear
-        printf "%s\n" "${GREEN}Doi ten mien thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Doi ten mien success.${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"
@@ -156,6 +156,6 @@ if [ -n "${domain}" ]; then
     fi
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     menu_wp
 fi

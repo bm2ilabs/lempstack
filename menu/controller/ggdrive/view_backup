@@ -22,7 +22,7 @@ select_date(){
         select=${entry///}
         dates+=("${select}")
     done
-    PS3="Nhap lua chon cua ban [0 = Thoat]: "
+    PS3="Enter your choice [0 = Exit]: "
     select date in "${dates[@]}"
     do
         date=${date}
@@ -35,7 +35,7 @@ _run(){
 
     if [ -z "${date}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac.${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
     else
         echo ""
         echo "Dang load danh sach. Vui long doi..."
@@ -52,7 +52,7 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
     select_remote
     if [ -z "${remote}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac.${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
     else
         _run
     fi

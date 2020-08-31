@@ -41,7 +41,7 @@ _run(){
     rclone copy /home/backup "${remote}":"${IPADDRESS}" >> /var/log/rclone.log 2>&1
     rm -rf /home/backup/"${CURRENT_DATE}"/"${domain}"
     clear
-    printf "%s\n" "${GREEN}Sao luu du lieu thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Sao luu du lieu success.${NC}"
 }
 
 if [ -f "/root/.config/rclone/rclone.conf" ]; then
@@ -51,12 +51,12 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
         select_remote
         if [ -z "${remote}" ]; then
             clear
-            printf "%s\n" "${RED}Ban da huy thao tac.${NC}"
+            printf "%s\n" "${RED}Ban da Cancel thao tac.${NC}"
         else
             select_domain
             if [ -z "${domain}" ]; then
                 clear
-                printf "%s\n" "${RED}Ban da huy thao tac.${NC}"
+                printf "%s\n" "${RED}Ban da Cancel thao tac.${NC}"
             else
                 _run
             fi

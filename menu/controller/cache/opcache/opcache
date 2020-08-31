@@ -36,10 +36,10 @@ set_opcache_status(){
 change_opcache_php1(){
     if [[ ${opcache1_status} -eq 1 ]]; then
         sed -i 's|opcache.enable=1|opcache.enable=0|g' "${PHP1_INI_PATH}"/10-opcache.ini
-        noti="Tat Opcache thanh cong."
+        noti="All Opcache success."
     else
         sed -i 's|opcache.enable=0|opcache.enable=1|g' "${PHP1_INI_PATH}"/10-opcache.ini
-        noti="Bat Opcache thanh cong."
+        noti="Real Opcache success."
     fi
 }
 

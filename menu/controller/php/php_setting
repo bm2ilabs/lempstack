@@ -31,8 +31,8 @@ set_variable(){
 }
 
 select_parameter(){
-    echo "Lua chon thong so muon thay đoi"
-    PS3='Nhap lua chon cua ban (1-5): '
+    echo "Choosethong so muon thay đoi"
+    PS3='Enter your choice (1-5): '
     options=("post_max_size" "upload_max_filesize" "memory_limit" "max_input_time" "max_execution_time" "Cancel")
     select opt in "${options[@]}"
     do
@@ -43,7 +43,7 @@ select_parameter(){
             "max_input_time") parameter="max_input_time"; break;;
             "max_execution_time") parameter="max_execution_time"; break;;
             "Cancel") parameter="0"; break;;
-            *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai.${NC}" ;;
+            *) printf "%s\n" "${RED}You entered incorrectly, please re-enter.${NC}" ;;
         esac
     done
 }
@@ -51,7 +51,7 @@ select_parameter(){
 input_parameter(){
     while true
     do
-        read -r -p "Nhap vao thong so moi (Ex: 120) [0 = Thoat]: " num
+        read -r -p "Nhap vao thong so moi (Ex: 120) [0 = Exit]: " num
         echo
         if [[ "${num}" =~ ^[0-9]+$ ]]; then
             break
@@ -98,17 +98,17 @@ _run(){
     set_variable
     select_parameter
     if [ "${parameter}" == "0" ]; then
-        printf "%s\n" "${RED}Huy thay đoi thong so PHP.${NC}"
+        printf "%s\n" "${RED}Cancel thay đoi thong so PHP.${NC}"
     else
         input_parameter
 
         if [ "${num}" == "0" ]; then
-            printf "%s\n" "${RED}Huy thay đoi thong so PHP.${NC}"
+            printf "%s\n" "${RED}Cancel thay đoi thong so PHP.${NC}"
         else
             remove_ini_bak
             change_parameter
             restart_php
-            printf "%s\n" "${GREEN}Thay đoi thong so PHP thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Thay đoi thong so PHP success.${NC}"
         fi
     fi
 }

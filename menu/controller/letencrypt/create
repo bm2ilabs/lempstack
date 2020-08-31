@@ -51,7 +51,7 @@ _run(){
         sleep 2
         restart_nginx
         clear
-        printf "%s\n" "${GREEN}Cau hinh SSL thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Cau hinh SSL success.${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"
@@ -67,7 +67,7 @@ if [ -n "${domain}" ]; then
     menu_letencrypt
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac.${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
     menu_letencrypt
 fi
 

@@ -13,15 +13,15 @@
 CHOICE=1
 
 printf "%s=============================%s\n" "${GREEN}" "${NC}"
-printf "    %sPhan quyen Chown/Chmod%s\n   " "${GREEN}" "${NC}"
+printf "%s Decentralized Chown / Chmod %s\n" "${GREEN}" "${NC}"
 printf "%s=============================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Phan quyen website%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Phan quyen toan bo website%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Website decentralization%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Complete decentralization of website%s\n" "${GREEN}" "${NC}"
     printf "%s ============================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
 
     if [ -z "${CHOICE}" ]
     then
@@ -32,6 +32,6 @@ do
         1) permission_one ;;
         2) permission_all ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

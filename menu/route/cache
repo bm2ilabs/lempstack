@@ -13,19 +13,19 @@
 CHOICE=1
 
 printf "%s====================%s\n" "${GREEN}" "${NC}"
-printf "    %sQuan ly Cache%s   \n" "${GREEN}" "${NC}"
+printf "%s   Cache Manager    %s\n" "${GREEN}" "${NC}"
 printf "%s====================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
     printf "%s1. Memcached%s\n" "${GREEN}" "${NC}"
     printf "%s2. Redis%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Quan ly Opcache%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Xoa Cache%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Cai dat Memcached%s\n" "${GREEN}" "${NC}"
-    printf "%s6. Cai dat Redis%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Opcache management%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Clear the Cache%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Install Memcached%s\n" "${GREEN}" "${NC}"
+    printf "%s6. Installing Redis%s\n" "${GREEN}" "${NC}"
     printf "%s =================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -39,6 +39,6 @@ do
         5) clear; inst_memcached ;;
         6) clear; inst_redis ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n"  "${GREEN}Lua chon cua ban khong chinh xac. Vui long chon lai.${RED}";;
+        *) clear; printf "%s\n"  "${GREEN}Your choice is not correct. Please choose again.${RED}";;
     esac
 done

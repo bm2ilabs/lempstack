@@ -122,7 +122,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Scan bug WordPress.
 - Thay đổi Prefix database cho wordpress.
 - Bật/tắt bảo vệ 2 lớp cho wp-admin.
-- Option disable wp cron, chuyển sang dùng cronjob giúp tăng tốc độ cho WordPress.
+- Option disable wp cron, cCancelển sang dùng cronjob giúp tăng tốc độ cho WordPress.
 - Lựa chọn website khi backup tự động
 - Thêm tính năng đồng bộ qua 1 vps dự phòng.
 - Các tính năng được người dùng yêu cầu.

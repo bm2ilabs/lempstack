@@ -23,7 +23,7 @@ set_var(){
 check_version(){
     cd_dir /home/"${username}"/"${domain}"/public_html/
     clear
-    printf "%s\n" "${GREEN}Phien ban WordPress dang su dung: $(wp core version --allow-root) ${NC}"
+    printf "%s\n" "${GREEN}The version WordPress is using: $(wp core version --allow-root) ${NC}"
 }
 
 _run(){
@@ -46,7 +46,7 @@ if [ -n "${domain}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 
 menu_wp

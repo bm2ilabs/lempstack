@@ -82,7 +82,7 @@ run(){
     config_phpmyadmin
     restart_service
     clear
-    printf "%s\n" "${GREEN}Update phpMyAdmin thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Update phpMyAdmin with success.${NC}"
 }
 
 run

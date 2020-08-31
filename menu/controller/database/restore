@@ -23,12 +23,12 @@ set_var(){
 confirm_restore(){
     while true
     do
-        read -r -p "Ban muon khoi phuc du lieu ? (y/n) " promt_restore
+        read -r -p "You want to recover data? (y/n) " promt_restore
         echo
         if [[ "${promt_restore}" =~ ^([yY])$ || "${promt_restore}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -42,25 +42,25 @@ _run(){
     set_var
     if if_is_wordpress "${username}" "${domain}"; then
         clear
-        printf "%s\n" "${RED}Website nay su dung WordPress, vui long dung Menu Quan ly Wordpress.${NC}"
+        printf "%s\n" "${RED}This website uses WordPress, please use Wordpress Management Menu.${NC}"
         return 1
     fi
 
     check_backup_exists "${date}" "${domain}"
 
     if ! check_backup_empty "${date}" "${domain}"; then
-        ALERT="${RED}Ten mien nay khong co backup.${NC}\n"
+        ALERT="${RED}This username does not have backup.${NC}\n"
     fi
 
     if [ ! -f "/home/backup/${date}/${domain}/${domain}.sql" ]; then
-        ALERT="${RED}Ten mien nay khong co backup.${NC}\n"
+        ALERT="${RED}This username does not have backup.${NC}\n"
     fi
 
     if [[ -z "${ALERT}" ]]; then
         empty_db
         _restore
         clear
-        printf "%s\n" "${GREEN}Khoi phuc du lieu thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Restore success data.${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"
@@ -76,18 +76,18 @@ if [[ "${promt_restore}" =~ ^([yY])$ ]]; then
     list_backup
     if [ -z "${date}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     else
         if [ -z "${domain}" ]; then
             clear
-            printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+            printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
         else
             _run
         fi
     fi
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy khoi phuc du lieu.${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the data recovery.${NC}"
 fi
 
 menu_backup

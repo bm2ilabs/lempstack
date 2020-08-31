@@ -21,10 +21,10 @@ find_string(){
 _xmlrpc(){
     if [ -z "${string}" ]; then
         sed -i '/index.html/a include /etc/nginx/wordpress/disable_xmlrpc.conf;' /etc/nginx/conf.d/"${domain}".conf
-        noti="${GREEN}Bat chan XMLRPC thanh cong.${NC}/n"
+        noti="${GREEN}Enable XMLRPC success.${NC}/n"
     else
         sed -i '/disable_xmlrpc.conf/d' /etc/nginx/conf.d/"${domain}".conf
-        noti="${GREEN}Bo chan XMLRPC thanh cong.${NC}/n"
+        noti="${GREEN}Disable XMLRPC success.${NC}/n"
     fi
 }
 
@@ -40,7 +40,7 @@ _run(){
         printf "%s\n" "${noti}"
     else
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     fi
 }
 

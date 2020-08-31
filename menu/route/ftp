@@ -13,20 +13,20 @@
 # shellcheck disable=SC2154
 CHOICE=1
 
-printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%s   Quan ly FTP     %s\n" "${GREEN}" "${NC}"
-printf "%s   Port FTP:  %s   %s\n" "${GREEN}" "${ftp_port}" "${NC}"
-printf "%s===================%s\n" "${GREEN}" "${NC}"
+printf "%s======================%s\n" "${GREEN}" "${NC}"
+printf "%s   FTP management     %s\n" "${GREEN}" "${NC}"
+printf "%s   Port FTP:  %s      %s\n" "${GREEN}" "${ftp_port}" "${NC}"
+printf "%s======================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Tao user FTP%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Doi mat khau FTP%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Xoa User FTP%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Doi Port FTP%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Cai dat PURE-FTPD%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Create FTP user%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Change FTP password%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Delete User FTP%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Change FTP Port%s\n" "${GREEN}" "${NC}"
+    printf "%s5. PURE-FTPD settings%s\n" "${GREEN}" "${NC}"
     printf "%s ==================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -39,6 +39,6 @@ do
         4) clear; ftp_port ;;
         5) clear; ftp_install ;;
         0) clear; menu_lemp ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

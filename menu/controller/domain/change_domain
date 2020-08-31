@@ -24,7 +24,7 @@ input(){
     false
     while [ $? -eq 1 ]
     do
-        read -r -p "Nhap domain moi (Khong có www) [0 = Thoat]: " newdomain
+        read -r -p "Enter new domain (No www) [0 = Exit]: " newdomain
         if [ "${newdomain}" == "0" ]; then
             break
         else
@@ -34,12 +34,12 @@ input(){
                 "${BASH_DIR}"/menu/validate/check_value domain "${newdomain}"
                 if [[ $? -eq 1 ]]; then
                     clear
-                    printf "%s\n" "${RED}Ten mien ban nhap khong chinh xac vui long nhap lai.${NC}"
+                    printf "%s\n" "${RED}The name you entered is not correct, please re-enter.${NC}"
                     false
                 fi
             else
                 clear
-                printf "%s\n" "${RED}Ten mien ban nhap khong chinh xac vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}The name you entered is not correct, please re-enter.${NC}"
                 false
             fi
         fi
@@ -79,10 +79,10 @@ _run(){
         change_vhost
         change_phpconfig
         clear
-        printf "%s\n" "${GREEN}Doi domain thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Change domain success.${NC}"
     else
         clear
-        printf "%s\n" "${RED}Website dang su dung WordPress. Vui long su dung chuc nang doi ten mien trong menu WordPress.${NC}"
+        printf "%s\n" "${RED}Website is using WordPress. Please use the domain name change function in the WordPress menu.${NC}"
     fi
 }
 
@@ -93,13 +93,13 @@ select_domain
 
 if [ -z "${domain}" ]; then
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 else
     set_var
     input
     if [ "${newdomain}" == "0" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     else
         _run
     fi

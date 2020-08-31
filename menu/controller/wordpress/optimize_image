@@ -16,12 +16,12 @@ source /var/hostvn/menu/helpers/function
 backup_confirm(){
     while true
     do
-        read -r -p "Ban co muon backup du lieu truoc khi toi uu khong? (y/n) " promt_backup
+        read -r -p "Do you want to back up data before optimization? (y/n) " promt_backup
         echo
         if [[ "${promt_backup}" =~ ^([yY])$ || "${promt_backup}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n" "${RED}Gia tri ban nhap khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}The value you entered is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -40,15 +40,15 @@ backup(){
 _run(){
     before=$(du -sh /home/"${username}"/"${domain}"/public_html/wp-content/uploads | cut -f1 -d"M")
     clear
-    printf "%s\n" "${GREEN}Chuan bi toi uu anh...${NC}"
+    printf "%s\n" "${GREEN}Prepare optimization...${NC}"
     pngquant /home/"${username}"/"${domain}"/public_html/wp-content/uploads/*/*/*.png --quality=75-80 --ext=.png --force
     jpegoptim /home/hathanhxyz/hathanh.xyz/public_html/wp-content/uploads/*/*/*.jpg -m 75
     jpegoptim /home/hathanhxyz/hathanh.xyz/public_html/wp-content/uploads/*/*/*.jpeg -m 75
     after=$(du -sh /home/"${username}"/"${domain}"/public_html/wp-content/uploads | cut -f1 -d"M")
     clear
-    printf "%s\n" "${GREEN}Toi uu hinh anh thanh cong${NC}"
-    printf "%s\n" "${GREEN}Dung luong truoc khi toi uu:${NC} ${RED}${before}M${NC}"
-    printf "%s\n" "${GREEN}Dung luong sau khi toi uu:${NC} ${RED}${after}M${NC}"
+    printf "%s\n" "${GREEN}Success image optimization${NC}"
+    printf "%s\n" "${GREEN}Capacity before optimization:${NC} ${RED}${before}M${NC}"
+    printf "%s\n" "${GREEN}Capacity after optimization:${NC} ${RED}${after}M${NC}"
 }
 
 promt_backup=""
@@ -57,7 +57,7 @@ select_domain
 
 if [ -z "${domain}" ]; then
     clear
-    printf "%s\n" "${RED}Ban da chon huy hanh dong.${NC}"
+    printf "%s\n" "${RED}You have selected Cancel action.${NC}"
 else
     username=$(grep -w "username" "${USER_DIR}/.${domain}.conf" | cut -f2 -d'=');
     backup_confirm

@@ -120,8 +120,8 @@ check_php2_release(){
 }
 
 select_php_ver(){
-    printf "Lua chon phien ban PHP ban muon cai dat\n"
-    PS3="Nhap vao lua chon cua ban [0 = Thoat]: "
+    printf "Choosephien ban PHP ban muon cai dat\n"
+    PS3="Enter your selection [0 = Exit]: "
     select opt in "${PHP_LIST[@]}"
     do
         case $opt in
@@ -132,7 +132,7 @@ select_php_ver(){
 
 check_duplicate_php(){
     if [[ "${php2_version}" == "${php1_version}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP thu 2 trung voi phien ban mac dinh. Huy cai dat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Phien ban PHP thu 2 trung voi phien ban mac dinh. Cancel cai dat.${NC}")
     fi
 }
 
@@ -367,7 +367,7 @@ _run(){
     select_php_ver
     if [ -z "${php2_version}" ]; then
         clear
-        printf "%s\n" "${RED}Huy hanh dong.${NC}"
+        printf "%s\n" "${RED}Cancel hanh dong.${NC}"
     else
         check_duplicate_php
 
@@ -384,7 +384,7 @@ _run(){
             systemctl start "${php2_version}"-php-fpm
             systemctl enable "${php2_version}"-php-fpm
             clear
-            printf "%s\n" "${GREEN}Cai dat thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Cai dat success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"

@@ -17,7 +17,7 @@ list_domain(){
     #https://www.cyberciti.biz/faq/linux-unix-shell-check-if-directory-empty/
     if [[ $(ls -A "${USER_DIR}") ]]; then
         clear
-        echo "Danh sach Domain tren VPS:"
+        echo "Domain list on VPS:"
         echo
         i=1
         cd_dir "${USER_DIR}"
@@ -29,10 +29,10 @@ list_domain(){
             i=$((i+1));
         done
         echo "----------------------------------"
-        echo "Tong Domain: $((i-1))"
+        echo "Total Domain: $((i-1))"
     else
         clear
-        printf "%s\n" "${RED}Khong co Domain nao ton tai tren he thong.${NC}"
+        printf "%s\n" "${RED}There is no domain at all on the system.${NC}"
     fi
 }
 

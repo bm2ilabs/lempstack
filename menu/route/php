@@ -15,21 +15,21 @@
 CHOICE=1
 
 printf "%s==================================%s\n" "${GREEN}" "${NC}"
-printf "%s           Quan ly PHP            %s\n" "${GREEN}" "${NC}"
+printf "%s           PHP management         %s\n" "${GREEN}" "${NC}"
 printf "%s==================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Kiem tra phien ban PHP mac dinh%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Kiem tra phien ban PHP 2%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Cap nhat phien ban PHP%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Khoi đong lai PHP              %s\n" "${GREEN}" "${NC}"
-    printf "%s5. Cau hinh thong so PHP          %s\n" "${GREEN}" "${NC}"
-    printf "%s6. Thay doi phien ban PHP mac dinh%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Check for default PHP version%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Check PHP version 2%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Update PHP version%s\n" "${GREEN}" "${NC}"
+    printf "%s4. PHP future review              %s\n" "${GREEN}" "${NC}"
+    printf "%s5. Configure PHP parameters          %s\n" "${GREEN}" "${NC}"
+    printf "%s6. Change the free PHP version%s\n" "${GREEN}" "${NC}"
     #printf "%s7. Thay doi phien ban PHP 2       %s\n"
-    printf "%s7. Cai dat phien ban PHP thu 2    %s\n" "${GREEN}" "${NC}"
+    printf "%s7. Install PHP version 2    %s\n" "${GREEN}" "${NC}"
     printf "%s =================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -40,13 +40,13 @@ do
         2)
             if [[ "${php2_release}" != "yes" ]]; then
                 clear
-                printf "${RED}Ban chua cai dat phien ban PHP thu 2.%s\n"
+                printf "${RED}You have not installed the collection PHP version 2.%s\n"
             else
                 #https://www.howtoforge.com/tutorial/linux-grep-command/
                 #https://stackoverflow.com/a/6284370
                 php2_ver=$(grep -w "php2_version" "${FILE_INFO}" | cut -f2 -d'=')
                 echo ""
-                echo "phien ban PHP thu 2 dang su dung la: ${php2_ver}"
+                echo "PHP version 2 is used as: ${php2_ver}"
                 echo ""
             fi
             menu_php
@@ -54,12 +54,12 @@ do
         3)
             yum -y update php-fpm
             clear
-            printf "%s\n" "${RED}Phien ban PHP mac dinh da la moi nhat.${NC}"
+            printf "%s\n" "${RED}The default PHP version is up to date.${NC}"
 
             if [[ "${php2_release}" == "yes" ]]; then
                 yum -y update "${php2_version}"-php-fpm
                 clear
-                printf "%s\n" "${RED}Phien ban PHP 2 dang la moi nhat.${NC}"
+                printf "%s\n" "${RED}PHP 2 is the latest version${NC}"
             fi
             menu_php
             ;;
@@ -69,7 +69,7 @@ do
                 systemctl restart "${php2_version}"-php-fpm
             fi
             clear
-            printf "%s\n" "${GREEN}Khoi dong lai PHP thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Restart PHP success..${NC}"
             menu_php
             ;;
         5) clear; php_setting ;;
@@ -77,6 +77,6 @@ do
         #7) clear; php2_change ;;
         7) clear; php_inst_ver_2 ;;
         0) clear; menu_lemp ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

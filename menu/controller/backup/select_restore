@@ -13,16 +13,16 @@
 CHOICE=1
 
 printf "%s=====================%s\n" "${GREEN}" "${NC}"
-printf "%s  Khoi phuc du lieu  %s\n" "${GREEN}" "${NC}"
+printf "%s  Data recovery  %s\n" "${GREEN}" "${NC}"
 printf "%s=====================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Khoi phuc full%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Khoi phuc ma nguon%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Khoi phuc database%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Full recovery%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Source code recovery%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Database recovery%s\n" "${GREEN}" "${NC}"
     printf "%s ====================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -33,6 +33,6 @@ do
         2) clear; restore_source;;
         3) clear; restore_db ;;
         0) clear; menu_backup ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

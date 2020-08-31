@@ -13,34 +13,34 @@
 source /var/hostvn/menu/helpers/function
 
 select_time(){
-    echo "Lua chon thoi gian ?"
-    PS3='Nhap lua chon cua ban (1-4): '
-    options=("Backup 1 lan/ngay" "Backup 1 lan/tuan" "Backup 1 lan/thang" "Backup 1 lan/nam" "Huy tao cronjob")
+    echo "Choose time?"
+    PS3='Enter your choice (1-4): '
+    options=("Backup 1 times/day" "Backup 1 times/week" "Backup 1 times/month" "Backup 1 times/year" "Cancel creating cronjob")
     select opt in "${options[@]}"
     do
         case $opt in
-            "Backup 1 lan/ngay") time="@midnight"; break;;
-            "Backup 1 lan/tuan") time="@weekly"; break;;
-            "Backup 1 lan/thang") time="@monthly"; break;;
-            "Backup 1 lan/nam") time="@yearly"; break;;
-            "Huy tao cronjob") time="0"; break;;
-            *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai.${NC}";;
+            "Backup 1 times/day") time="@midnight"; break;;
+            "Backup 1 times/week") time="@weekly"; break;;
+            "Backup 1 times/month") time="@monthly"; break;;
+            "Backup 1 times/year") time="@yearly"; break;;
+            "Cancel creating cronjob") time="0"; break;;
+            *) printf "%s\n" "${RED}You entered incorret choice, please re-enter.${NC}";;
         esac
     done
 }
 
 input_backup_num(){
-    echo "Nhap so ban backup ban muon luu tru: "
-    echo "VD: 14 - Se luu 14 ban backup gan nhap - Cac ban cu hon se bi xoa"
+    echo "Enter the number of backups you want to store: "
+    echo "Example: 14 - Save the latest 14 backup boards - Older friends will be deleted"
 
     while true
     do
-        read -r -p "Nhap vao lua chon cua ban [0 = Thoat]:" backup_num
+        read -r -p "Enter your selection [0 = Exit]:" backup_num
         echo
         if [[ "${backup_num}" =~ ^[0-9]+$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -67,19 +67,19 @@ create_cron(){
     crontab backuplocal
     rm -rf backuplocal
     clear
-    printf "%s\n" "${GREEN}Tao cronjob thanh cong.${NC}"
+    printf "%s\n" "${GREEN}cronjob created successfully.${NC}"
 }
 
 _run(){
     select_time
     if [ "${time}" == "0" ]; then
         clear
-        printf "%s\n" "${RED}Huy tao cronjob.${NC}"
+        printf "%s\n" "${RED}Cancel creating cronjob.${NC}"
     else
         set_backup_num
         if [ "${backup_num}" == "0" ]; then
             clear
-            printf "%s\n" "${RED}Huy tao cronjob.${NC}"
+            printf "%s\n" "${RED}Cancel creating cronjob.${NC}"
         else
             create_cron
         fi
@@ -94,6 +94,6 @@ if [ -z "${cron_exists}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Cronjob da ton tai.${NC}"
+    printf "%s\n" "${RED}Cronjob already exist.${NC}"
 fi
 menu_cronjob

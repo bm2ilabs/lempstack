@@ -13,17 +13,17 @@
 CHOICE=1
 
 printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%s    Quan ly Log    %s\n" "${GREEN}" "${NC}"
+printf "%s    Log manager    %s\n" "${GREEN}" "${NC}"
 printf "%s===================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Xem Log Nginx%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Xem Log PHP%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Xem Log MariaDB%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Xem theo ten mien%s\n" "${GREEN}" "${NC}"
+    printf "%s1. See Log Nginx%s\n" "${GREEN}" "${NC}"
+    printf "%s2. See Log PHP%s\n" "${GREEN}" "${NC}"
+    printf "%s3. See Log MariaDB%s\n" "${GREEN}" "${NC}"
+    printf "%s4. View by domain name%s\n" "${GREEN}" "${NC}"
     printf "%s ==================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -32,30 +32,30 @@ do
     case ${CHOICE} in
         1)
             clear
-            printf "%s\n" "${RED}Hien thi 10 dong log moi nhat...${NC}"
+            printf "%s\n" "${RED}Show the last 10 log...${NC}"
             echo ""
             tail /var/log/nginx/error.log
-            printf "%s\n" "${RED}Vi tri file log: /var/log/nginx/error.log${NC}"
+            printf "%s\n" "${RED}Log file location: /var/log/nginx/error.log${NC}"
             menu_log
             ;;
         2)
             clear
-            printf "%s\n" "${RED}Hien thi 10 dong log moi nhat...${NC}"
+            printf "%s\n" "${RED}Display the last 10 log...${NC}"
             echo ""
             tail /var/log/php-fpm/error.log
-            printf "%s\n" "${RED}Vi tri file log: /var/log/php-fpm/error.log${NC}"
+            printf "%s\n" "${RED}Log file location: /var/log/php-fpm/error.log${NC}"
             menu_log
             ;;
         3)
             clear
-            printf "%s\n" "${RED}Hien thi 20 dong log moi nhat...${NC}"
+            printf "%s\n" "${RED}Show the last 20 log...${NC}"
             echo ""
             tail /var/log/mysql/mysqld.log
-            printf "%s\n" "${RED}Vi tri file log: /var/log/mysql/mysqld.log${NC}"
+            printf "%s\n" "${RED}Log file location: /var/log/mysql/mysqld.log${NC}"
             menu_log
             ;;
         4) clear; domain_log;;
         0) clear; menu_lemp ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

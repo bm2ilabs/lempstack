@@ -12,19 +12,19 @@
 
 CHOICE=1
 
-printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%sQuan ly LEMP Stack %s\n" "${GREEN}" "${NC}"
-printf "%s===================%s\n" "${GREEN}" "${NC}"
+printf "%s========================%s\n" "${GREEN}" "${NC}"
+printf "%s  Management LEMP Stack %s\n" "${GREEN}" "${NC}"
+printf "%s========================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Quan ly Nginx%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Quan ly PHP%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Quan ly Database%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Quan ly FTP%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Quan ly Log%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Manager Nginx%s\n" "${GREEN}" "${NC}"
+    printf "%s2. PHP management%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Database management%s\n" "${GREEN}" "${NC}"
+    printf "%s4. FTP management%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Log management%s\n" "${GREEN}" "${NC}"
     printf "%s ==================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -37,6 +37,6 @@ do
         4) clear; menu_ftp;;
         5) clear; menu_log;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

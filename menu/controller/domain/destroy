@@ -15,7 +15,7 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s==========%s\n" "${GREEN}" "${NC}"
-printf "%sXoa Domain%s\n" "${GREEN}" "${NC}"
+printf "%sDelete the Domain%s\n" "${GREEN}" "${NC}"
 printf "%s==========%s\n" "${GREEN}" "${NC}"
 
 set_var(){
@@ -31,32 +31,32 @@ set_var(){
 }
 
 confirm(){
-    printf "%s\n" "${RED}Ban thuc su muon xoa ${domain}? ${NC}"
-    PS3="Nhap vao lua chon cua ban [1-2]"
+    printf "%s\n" "${RED}You really want to delete ${domain}? ${NC}"
+    PS3="Enter your selection [1-2]"
     options=("Yes" "No")
     select opt in "${options[@]}"
     do
         case $opt in
             "Yes") confirm_destroy_domain="y"; break;;
             "No") confirm_destroy_domain="n"; break;;
-            *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai${NC}";;
+            *) printf "%s\n" "${RED}You entered incorrectly, please re-enter${NC}";;
         esac
     done
 
     if [[ "${confirm_destroy_domain}" =~ ^([yY])$ ]]; then
         echo "Ban co muon xoa database ${db_name}? (y/n): "
-        PS3="Nhap vao lua chon cua ban [1-2]"
+        PS3="Enter your selection [1-2]"
         options=("Yes" "No")
         select opt in "${options[@]}"
         do
             case $opt in
                 "Yes") confirm_destroy_db="y"; break;;
                 "No") confirm_destroy_db="N"; break;;
-                *) printf "%s\n" "${RED}Ban nhap sai, vui long nhap lai${NC}";;
+                *) printf "%s\n" "${RED}You entered incorrectly, please re-enter${NC}";;
             esac
         done
     else
-        ALERT=$(printf "%s\n" "${RED}Ban đa chon huy xoa domain. Bye bye...${NC}")
+        ALERT=$(printf "%s\n" "${RED}You chose Cancel to delete the domain. Bye bye...${NC}")
     fi
 }
 
@@ -105,7 +105,7 @@ _run(){
     select_domain
     if [ -z "${domain}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+        printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
     else
         confirm
         if [ -z "${ALERT}" ]; then
@@ -123,7 +123,7 @@ _run(){
             remove_path
             restart_service
             clear
-            printf "%s\n" "${GREEN}Xoa Domain thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Delete Domain success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"

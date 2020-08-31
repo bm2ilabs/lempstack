@@ -16,12 +16,12 @@ source /var/hostvn/menu/helpers/function
 confirm(){
     while true
     do
-        read -r -p "Ban muon cai dat Memcached ? (y/n) " prompt_memcached
+        read -r -p "Do You want to install Memcached ? (y/n) " prompt_memcached
         echo
         if [[ "${prompt_memcached}" =~ ^([yY])$ || "${prompt_memcached}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -65,9 +65,9 @@ _run(){
         install
         inst_phpmemcachedadmin
         clear
-        printf "%s\n" "${GREEN}Cai dat Memcached thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Memcached installation is successful${NC}"
     else
-        printf "%s\n" "${RED}Memcached da duoc cai dat truoc do roi.${NC}"
+        printf "%s\n" "${RED}Memcached was already installed.${NC}"
     fi
 }
 
@@ -77,7 +77,7 @@ if [[ "${prompt_memcached}" =~ ^([yY])$ ]];then
     _run
 else
     clear
-    printf "%s\n" "${GREEN}Ban da huy cai dat Memcached.${NC}"
+    printf "%s\n" "${GREEN}You have uninstalled Memcached.${NC}"
 fi
 
 menu_cache

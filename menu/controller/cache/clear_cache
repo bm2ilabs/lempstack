@@ -31,7 +31,7 @@ clear_cache(){
         systemctl restart "${php2_version}"-php-fpm
     fi
     clear
-    printf "%s\n" "${GREEN}Xoa cache thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Successfully cleared cache.${NC}"
 }
 
 _run(){

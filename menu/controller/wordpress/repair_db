@@ -24,13 +24,13 @@ set_var(){
 backup_confirm(){
     while true
     do
-        read -r -p "Ban co muon backup du lieu truoc khi repair khong? (y/n) " promt_backup
+        read -r -p "Do you want to backup data before repairing? (y/n) " promt_backup
         echo
         if [[ "${promt_backup}" =~ ^([yY])$ || "${promt_backup}" =~ ^([nN])$ ]];
         then
             break
         else
-            printf "%s\n" "${RED}Gia tri ban nhap khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}The value you entered is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -50,7 +50,7 @@ _repair_db(){
     cd_dir /home/"${username}"/"${domain}"/public_html
     wp db repair --allow-root
     clear
-    printf "%s\n" "${GREEN}Repair database thanh cong.${NC}"
+    printf "%s\n" "${GREEN}Repair database success.${NC}"
 }
 
 _run(){
@@ -80,7 +80,7 @@ if [ -n "${domain}" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 echo ""
 wp_menu_database

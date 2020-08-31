@@ -32,7 +32,7 @@ do
     printf "%s1. Mo Memcached%s\n" "${GREEN}" "${NC}"
     printf "%s2. Tat Memcached%s\n" "${GREEN}" "${NC}"
     echo " ----------------------------------------------- "
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
 
     if [ -z "${CHOICE}" ]
     then
@@ -81,6 +81,6 @@ do
             menu_cache
             ;;
         0) clear; menu_cache ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

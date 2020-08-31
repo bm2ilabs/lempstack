@@ -36,15 +36,15 @@ check_service(){
     mariadb="$(pgrep -f mariadb)"
 
     if [ -z "${nginx}" ]; then
-        nginx_status="${RED}Khong hoat dong${NC}"
+        nginx_status="${RED}Inactive${NC}"
     fi
 
     if [ -z "${phpfpm}" ]; then
-        phpfpm_status="${RED}Khong hoat dong${NC}"
+        phpfpm_status="${RED}Inactive${NC}"
     fi
 
     if [ -z "${mariadb}" ]; then
-        mariadb_status="${RED}Khong hoat dong${NC}"
+        mariadb_status="${RED}Inactive${NC}"
     fi
 
     if [[  -z "${nginx}" || -z "${phpfpm}" || -z "${mariadb}" ]]; then

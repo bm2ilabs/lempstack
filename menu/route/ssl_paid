@@ -12,16 +12,16 @@
 
 CHOICE=1
 
-printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%sQuan ly SSL tra phi%s\n" "${GREEN}" "${NC}"
-printf "%s===================%s\n" "${GREEN}" "${NC}"
+printf "%s========================%s\n" "${GREEN}" "${NC}"
+printf "%sPremium SSL management  %s\n" "${GREEN}" "${NC}"
+printf "%s========================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Cai đat SSL%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Go bo SSL%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Install SSL%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Remove SSL%s\n" "${GREEN}" "${NC}"
     printf "%s -------------%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -31,6 +31,6 @@ do
         1) clear; ssl_create ;;
         2) clear; ssl_remove ;;
         0) clear; menu_ssl ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

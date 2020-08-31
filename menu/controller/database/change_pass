@@ -14,32 +14,32 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s==================%s\n" "${GREEN}" "${NC}"
-printf "%sDoi Password Mysql%s\n" "${GREEN}" "${NC}"
+printf "%sChange Password Mysql%s\n" "${GREEN}" "${NC}"
 printf "%s==================%s\n" "${GREEN}" "${NC}"
 
 
 input(){
     while true
     do
-        echo "Username khong chua ky tu dac biet va dai 5 ky tu tro len."
-        read -r -p "Nhap Mysql user [0 = Thoat]: " db_user
+        echo "Username does not contain special characters and must be 5 characters in length."
+        read -r -p "Enter a Mysql user [0 = Exit]: " db_user
         echo
         if validate_user "${db_user}"; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 
     if [ "${db_user}" != "0" ]; then
         while true
         do
-            read -r -p "Xac nhan thay doi mat khau cho user ${db_user}? (y/n): " confirm
+            read -r -p "Confirm the password change for the user ${db_user}? (y/n): " confirm
             echo
             if [[ "${confirm}" =~ ^([yY])$ || "${confirm}" =~ ^([nN])$ ]]; then
                 break
             else
-                printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+                printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
             fi
         done
         password=$(gen_pass "$@")
@@ -48,13 +48,13 @@ input(){
 
 validate(){
     if [ "${db_user}" = "admin" ]; then
-        ALERT=$(printf "%s\n" "${RED}Ban khong duoc phep thay doi mat khau tai khoan admin.${NC}")
+        ALERT=$(printf "%s\n" "${RED}You must not change the password in the admin account.${NC}")
     fi
 }
 
 _change_pass(){
     if [[ "${confirm}" =~ ^([yY])$ ]]; then
-        printf "%s\n" "${GREEN}Dang thay đoi mat khau...${NC}"
+        printf "%s\n" "${GREEN}Changing password...${NC}"
         sleep 1
         mysql -e "SET PASSWORD FOR '${db_user}'@'localhost' = PASSWORD('${password}')"
 
@@ -67,11 +67,11 @@ _change_pass(){
         fi
 
         clear
-        printf "%s\n" "${GREEN}Thay doi mat khau thanh cong.${NC}"
-        printf "%s\n" "${GREEN}Mat khau moi la:${NC} ${RED}${password}${NC}"
+        printf "%s\n" "${GREEN}Change password success.${NC}"
+        printf "%s\n" "${GREEN}The new password is:${NC} ${RED}${password}${NC}"
     else
         clear
-        printf "%s\n" "${GREEN}Ban da huy thay doi mat khau.${NC}"
+        printf "%s\n" "${GREEN}Cancel changed the password.${NC}"
     fi
 }
 
@@ -80,13 +80,13 @@ _run(){
 
     if [ "${db_user}" == "0" ]; then
         clear
-        printf "%s\n" "${GREEN}Ban da huy thay doi mat khau.${NC}"
+        printf "%s\n" "${GREEN}Cancel changed your password.${NC}"
     else
         validate
 
         if ! if_mysql_user_exists "${db_user}";
         then
-            ALERT=$(printf "%s\n" "${RED}Mysql User khong ton tai.${NC}")
+            ALERT=$(printf "%s\n" "${RED}Mysql User not available.${NC}")
         fi
 
         if [ -z "${ALERT}" ]; then

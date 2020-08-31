@@ -26,7 +26,7 @@ confirm(){
         then
             break
         else
-            printf "%s\n" "${RED}Gia tri ban nhap khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}The value you entered is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -53,18 +53,18 @@ set_var(){
 
 check_duplicate_php(){
     if [[ "${php1_new}" == "${php1_version}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP mac dinh ban muon thay doi giong phien ban hien tai. Huy cai dat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Phien ban PHP mac dinh ban muon thay doi giong phien ban hien tai. Cancel cai dat.${NC}")
     fi
 
     if [[ "${php2_release}" == "yes" && "${php1_new}" == "${php2_version}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP mac dinh ban chon giong phien ban PHP 2. Huy cai dat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Phien ban PHP mac dinh ban chon giong phien ban PHP 2. Cancel cai dat.${NC}")
     fi
 }
 
 select_php_ver(){
     clear
-    printf "Lua chon phien ban PHP mac dinh\n"
-    PS3="Nhap vao lua chon cua ban [0 = Thoat]: "
+    printf "Choosephien ban PHP mac dinh\n"
+    PS3="Enter your selection [0 = Exit]: "
     select opt in "${PHP_LIST[@]}"
     do
         case $opt in
@@ -316,7 +316,7 @@ _run(){
     set_var
     select_php_ver
     if [ -z "${php1_new}" ]; then
-        printf "%s\n" "${RED}Huy thay doi phien ban PHP.${NC}"
+        printf "%s\n" "${RED}Cancel thay doi phien ban PHP.${NC}"
     else
         check_duplicate_php
 
@@ -335,7 +335,7 @@ _run(){
             write_info
 
             clear
-            printf "%s\n" "${GREEN}Thay doi phien ban PHP thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Thay doi phien ban PHP success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"
@@ -350,7 +350,7 @@ confirm
 if [[ "${prompt_php1}" =~ ^([yY])$ ]]; then
     _run
 else
-    printf "%s\n" "${GREEN}Ban da huy thay doi phien ban PHP.${NC}"
+    printf "%s\n" "${GREEN}Ban da Cancel thay doi phien ban PHP.${NC}"
 fi
 
 menu_php

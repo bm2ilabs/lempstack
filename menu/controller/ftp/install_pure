@@ -18,7 +18,7 @@ confirm(){
         if [[ "${promtp_ftp}" =~ ^([yY])$ || "${promtp_ftp}" =~ ^([nN])$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri khong chinh xac. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}Value is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -85,7 +85,7 @@ EOpure_ftpd_conf
         systemctl start pure-ftpd
         systemctl enable pure-ftpd
         clear
-        printf "%s\n" "${GREEN}Cai dat PURE-FTPD thanh cong.${NC}"
+        printf "%s\n" "${GREEN}Cai dat PURE-FTPD success.${NC}"
     fi
 }
 
@@ -95,7 +95,7 @@ if [[ "${promtp_ftp}" =~ ^([yY])$ ]]; then
     install
 else
     clear
-    printf "%s\n" "${RED}Ban da huy cai dat PURE-FTPD.${NC}"
+    printf "%s\n" "${RED}Ban da Cancel cai dat PURE-FTPD.${NC}"
 fi
 
 menu_ftp

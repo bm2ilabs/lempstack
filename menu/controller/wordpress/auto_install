@@ -30,25 +30,25 @@ docroot_empty(){
     then
         while true
         do
-            read -r -p "Thu muc public_html dang co du lieu. Ban co muon xoa du lieu khong ? (y/n) " promtp_install
+            read -r -p "The public_html directory is having data. Do you want to delete data? (y/n) " promtp_install
             echo
             if [[ "${promtp_install}" =~ ^([yY])$  || "${promtp_install}" =~ ^([nN])$ ]];
             then
                 break
             else
-                printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}Your choose was not correct. Please re-enter.${NC}"
             fi
         done
     else
         while true
         do
-            read -r -p "Ban muon cai dat WordPress tu dong ? (y/n) " promtp_install
+            read -r -p "Do you want to install WordPress automatically? (y/n) " promtp_install
             echo
             if [[ "${promtp_install}" =~ ^([yY])$ || "${promtp_install}" =~ ^([nN])$ ]];
             then
                 break
             else
-                printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}Your choose was not correct. Please re-enter.${NC}"
             fi
         done
     fi
@@ -60,13 +60,13 @@ database_empty(){
     else
         while true
         do
-            read -r -p "Database dang co du lieu. Ban co muon xoa du lieu hien co khong ? (y/n) " promtp_install
+            read -r -p "Database is having data. Do you want to delete existing data? (y/n) " promtp_install
             echo
             if [[ "${promtp_install}" =~ ^([yY])$ || "${promtp_install}" =~ ^([nN])$ ]];
             then
                 break
             else
-                printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long nhap lai.${NC}"
+                printf "%s\n" "${RED}Your choose was not correct. Please re-enter.${NC}"
             fi
         done
     fi
@@ -169,8 +169,8 @@ END
 
 show_info(){
     echo ""
-    printf "1. User dang nhap wp-admin    : %s\n" "${admin_user}"
-    printf "2. Mat khau dang nhap wp-admin: %s\n" "${admin_pwd}"
+    printf "1. User is logged in wp-admin    : %s\n" "${admin_user}"
+    printf "2. Wp-admin login password: %s\n" "${admin_pwd}"
     echo   "------------------------------------"
 }
 
@@ -183,11 +183,11 @@ _run(){
 
     if [[ "${promtp_install}" =~ ^([yY])$ ]]; then
         if ! if_mysql_user_exists "${db_user}"; then
-            ALERT=$(printf "%s\n" "${RED}Mysql User khong ton tai.${NC}")
+            ALERT=$(printf "%s\n" "${RED}Mysql User does not exist.${NC}")
         fi
 
         if ! if_db_exists "${db_name}"; then
-            ALERT=$(printf "%s\n" "${RED}Database khong ton tai.${NC}")
+            ALERT=$(printf "%s\n" "${RED}Database does not exist.${NC}")
         fi
 
         if [ -z "${ALERT}" ]; then
@@ -200,7 +200,7 @@ _run(){
             create_vhost
             restart_service
             clear
-            printf "%s\n" "${GREEN}Cai dat WordPress thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Install WordPress success.${NC}"
             show_info
         else
             clear
@@ -208,7 +208,7 @@ _run(){
         fi
     else
         clear
-        printf "%s\n" "${RED}Ban da huy cai dat tu dong WordPress.${NC}"
+        printf "%s\n" "${RED}You have Canceled WordPress automatic installation.${NC}"
     fi
 }
 
@@ -221,7 +221,7 @@ if [ -n "${domain}" ]; then
     _run "$@"
 else
     clear
-    printf "%s\n" "${RED}Ban da chon huy thao tac${NC}"
+    printf "%s\n" "${RED}You have chosen to cancel the action${NC}"
 fi
 
 menu_wp

@@ -13,17 +13,17 @@
 CHOICE=1
 
 printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%s  Sao luu du lieu  %s\n" "${GREEN}" "${NC}"
+printf "%s  Data backup  %s\n" "${GREEN}" "${NC}"
 printf "%s===================%s\n" "${GREEN}" "${NC}"
 echo ""
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Sao luu ma nguon%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Sao luu database%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Sao luu full%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Source code backup%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Database backup%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Full backup%s\n" "${GREEN}" "${NC}"
     printf "%s ================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Click on your choice [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -34,6 +34,6 @@ do
         2) clear; backup_db ;;
         3) clear; backup_full ;;
         0) clear; menu_backup ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

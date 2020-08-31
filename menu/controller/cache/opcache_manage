@@ -28,12 +28,12 @@ echo
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Bat/Tat Opcache%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Enable / Disable Opcache%s\n" "${GREEN}" "${NC}"
     printf "%s2. Them website vao blacklist%s\n" "${GREEN}" "${NC}"
     printf "%s3. Xoa website khoi blacklist%s\n" "${GREEN}" "${NC}"
     printf "%s4. Xoa cache Opcache%s\n" "${GREEN}" "${NC}"
     printf "%s ========================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -45,6 +45,6 @@ do
         3) clear; opcache_remove_blacklist ;;
         4) clear; clear_opcache ;;
         0) clear; menu_cache ;;
-        *) clear; printf "%sLua chon cua ban khong chinh xac. Vui long chon lai.%s\n" "${RED}" "${NC}";;
+        *) clear; printf "%sYour choice is not correct. Please choose again.%s\n" "${RED}" "${NC}";;
     esac
 done

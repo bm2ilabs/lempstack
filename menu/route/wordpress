@@ -13,22 +13,22 @@
 CHOICE=1
 
 printf "%s=========================================%s\n" "${GREEN}" "${NC}"
-printf "%s            Quan ly WordPress            %s\n" "${GREEN}" "${NC}"
+printf "%s            Manage WordPress             %s\n" "${GREEN}" "${NC}"
 printf "%s=========================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Cai dat WordPress tu dong%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Kiem tra phien ban WordPress%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Cap nhat phien ban WordPress%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Quan ly Plugins%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Quan ly Database%s\n" "${GREEN}" "${NC}"
-    printf "%s6. Khoi phuc/Sao luu du lieu%s\n" "${GREEN}" "${NC}"
-    printf "%s7. Chuc nang nang cao%s\n" "${GREEN}" "${NC}"
-    printf "%s8. Thay doi ten mien%s\n" "${GREEN}" "${NC}"
-    printf "%s9. Doi mat khau admin (wp-admin)%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Automatic WordPress installation%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Check WordPress version%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Update WordPress version%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Manage Plugins%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Database management%s\n" "${GREEN}" "${NC}"
+    printf "%s6. Restore / Backup data%s\n" "${GREEN}" "${NC}"
+    printf "%s7. Advanced functionality%s\n" "${GREEN}" "${NC}"
+    printf "%s8. Change domain name%s\n" "${GREEN}" "${NC}"
+    printf "%s9. Change admin password (wp-admin)%s\n" "${GREEN}" "${NC}"
     printf "%s ========================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -45,6 +45,6 @@ do
         8) clear; wp_change_domain ;;
         9) clear; wp_change_pass_admin ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

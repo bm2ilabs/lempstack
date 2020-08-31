@@ -13,19 +13,19 @@
 CHOICE=1
 
 printf "%s==============================================%s\n" "${GREEN}" "${NC}"
-printf "%s                Quan ly cronjob               %s\n" "${GREEN}" "${NC}"
+printf "%s                Manage cronjob                %s\n" "${GREEN}" "${NC}"
 printf "%s==============================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Kiem tra cac Cronjob tren VPS%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Tao Cronjob auto renew Let's Encrypt%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Tao Cronjob tu dong backup tai VPS%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Tao Cronjob tu dong backup len Google Drive%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Tao cronjob tuy chinh%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Check out the Cronjob on VPS%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Create Cronjob auto renew Let's Encrypt%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Create Cronjob automatically backup at VPS%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Create Cronjob automatically backup to Google Drive%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Create Cronjob custom%s\n" "${GREEN}" "${NC}"
     printf "%s6. Xóa cronjob%s\n" "${GREEN}" "${NC}"
     printf "%s =============================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -46,11 +46,11 @@ do
                 crontab le
                 rm -rf le
                 clear
-                printf "%s\n" "${GREEN}Tao cronjob thanh cong.${NC}"
+                printf "%s\n" "${GREEN}Create Cronjob success.${NC}"
                 echo ""
             else
                 clear
-                printf "${RED}Cronjob da ton tai.%s\n"
+                printf "${RED}Cronjob already exist.%s\n"
                 echo ""
             fi
 
@@ -60,14 +60,14 @@ do
         4) clear; cron_backup_gg ;;
         5)
             clear
-            printf "${RED}Bam Ctrl + C de huy tao cronjob%s\n"
+            printf "${RED}Press Ctrl + C de Cancel Create Cronjob%s\n"
             echo ""
-            read -r -p "Nhap vao phut (Bo trong neu chay hang moi phut): " minutes
-            read -r -p "Nhap vao gio (Bo trong neu chay moi gio): " hours
-            read -r -p "Nhap vao ngay (Bo trong neu chay hang ngay): " days
-            read -r -p "Nhap vao thang (Bo trong neu chay hang thang): " months
-            read -r -p "Nhap vao tuan (Bo trong neu chay hang tuan): " weekday
-            read -r -p "Nhap vao lenh: " command
+            read -r -p "Enter a minute (Leave it blank if running every minutes): " minutes
+            read -r -p "Enter ahour (Leave it blank if running every hour): " hours
+            read -r -p "Enter a day (Leave it blank if running every day): " days
+            read -r -p "Enter a month (Leave it blank if running every month): " months
+            read -r -p "Enter a week (Leave it blank if running every weekly): " weekday
+            read -r -p "Enter a command: " command
 
             if [[ -z "${minutes}" ]]; then
                 minutes="*"
@@ -96,11 +96,11 @@ do
                 crontab cu_cron
                 rm -rf cu_cron
                 clear
-                printf "%s\n" "${GREEN}Tao cronjob thanh cong.${NC}"
+                printf "%s\n" "${GREEN}Create Cronjob success.${NC}"
                 echo ""
             else
                 clear
-                printf "%s\n" "${GREEN}Cronjob da ton tai.${RED}"
+                printf "%s\n" "${GREEN}Cronjob already exist.${RED}"
                 echo ""
             fi
 
@@ -108,6 +108,6 @@ do
             ;;
         6) clear; cron_destroy ;;
         0) clear; menu_primary ;;
-        *) clear; printf "%s\n" "${GREEN}Lua chon cua ban khong chinh xac. Vui long chon lai.${RED}";;
+        *) clear; printf "%s\n" "${GREEN}Your choice is not correct. Please choose again.${RED}";;
     esac
 done

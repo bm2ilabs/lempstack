@@ -13,22 +13,22 @@
 CHOICE=1
 
 printf "%s=========================================%s\n" "${GREEN}" "${NC}"
-printf "%s            Chuc nang nang cao           %s\n" "${GREEN}" "${NC}"
+printf "%s            Advanced functionality       %s\n" "${GREEN}" "${NC}"
 printf "%s=========================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Bat/Tat Yoast Seo config%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Bat/Tat Rank Math Seo config%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Cau hinh Nginx voi plugin cache%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Them cache key tranh trung lap noi dung%s\n" "${GREEN}" "${NC}"
-    printf "%s5. Bat/Tat Debug mode%s\n" "${GREEN}" "${NC}"
-    printf "%s6. Bat/Tat che do bao tri (Maintenance mode)%s\n" "${GREEN}" "${NC}"
-    printf "%s7. Bat/Tat disable xmlrpc%s\n" "${GREEN}" "${NC}"
-    printf "%s8. Bat/Tat WP-Cron%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Enable / Disable Yoast Seo config%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Enable / Disable Rank Math Seo config%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Configure Nginx with the cache plugin%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Add a cache key to avoid duplicate content%s\n" "${GREEN}" "${NC}"
+    printf "%s5. Enable / Disable Debug mode%s\n" "${GREEN}" "${NC}"
+    printf "%s6. Enable / Disable Maintenance mode%s\n" "${GREEN}" "${NC}"
+    printf "%s7. Enable / Disable disable xmlrpc%s\n" "${GREEN}" "${NC}"
+    printf "%s8. Enable / Disable WP-Cron%s\n" "${GREEN}" "${NC}"
     printf "%s9. Toi uu anh%s\n" "${GREEN}" "${NC}"
     printf "%s ========================================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -45,6 +45,6 @@ do
         8) clear; wp_cron ;;
         9) clear; wp_optimize_img ;;
         0) clear; menu_wp ;;
-        *) clear; printf "%s\n"  "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n"  "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

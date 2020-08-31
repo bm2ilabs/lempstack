@@ -13,17 +13,17 @@
 CHOICE=1
 
 printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "    %sBao mat VPS %s   \n" "${GREEN}" "${NC}"
+printf "%s   VPS security    %s\n" "${GREEN}" "${NC}"
 printf "%s===================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Cai dat Clamav%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Install Clamav%s\n" "${GREEN}" "${NC}"
     printf "%s2. Scan Malware%s\n" "${GREEN}" "${NC}"
     #printf "%s3. Cau hinh Naxsi Firewall%s\n" "${GREEN}" "${NC}"
 #    printf "%s4. Kiem tra ddos%s\n" "${GREEN}" "${NC}"
     printf "%s ==================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -34,6 +34,6 @@ do
         2) clear; scan_malware;;
         #3) clear; printf "%sSe update sau%s\n" "${RED}" "${NC}"; menu_security;;
         0) clear; menu_vps;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done

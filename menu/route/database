@@ -12,24 +12,24 @@
 
 CHOICE=1
 
-printf "%s==========================%s\n" "${GREEN}" "${NC}"
-printf "%sQuan ly Database - MariaDB%s\n" "${GREEN}" "${NC}"
-printf "%s==========================%s\n" "${GREEN}" "${NC}"
+printf "%s=================================%s\n" "${GREEN}" "${NC}"
+printf "%s  Database Management - MariaDB  %s\n" "${GREEN}" "${NC}"
+printf "%s=================================%s\n" "${GREEN}" "${NC}"
 
 while [ "${CHOICE}" != "0" ]
 do
-    printf "%s1. Danh sach Database%s\n" "${GREEN}" "${NC}"
-    printf "%s2. Tao Database%s\n" "${GREEN}" "${NC}"
-    printf "%s3. Doi mat khau DB User%s\n" "${GREEN}" "${NC}"
-    printf "%s4. Xoa Database%s\n" "${GREEN}" "${NC}"
+    printf "%s1. Database list%s\n" "${GREEN}" "${NC}"
+    printf "%s2. Create Database%s\n" "${GREEN}" "${NC}"
+    printf "%s3. Change the password DB User%s\n" "${GREEN}" "${NC}"
+    printf "%s4. Delete Database%s\n" "${GREEN}" "${NC}"
     printf "%s5. Backup Database%s\n" "${GREEN}" "${NC}"
-    printf "%s6. Khoi phuc Database%s\n" "${GREEN}" "${NC}"
-    printf "%s7. Xoa backup Database%s\n" "${GREEN}" "${NC}"
-    printf "%s8. Khoi dong lai MariaDB%s\n" "${GREEN}" "${NC}"
-    printf "%s9. Tat MariaDB%s\n" "${GREEN}" "${NC}"
-    printf "%s10. Bat MariaDB%s\n" "${GREEN}" "${NC}"
+    printf "%s6. Database recovery%s\n" "${GREEN}" "${NC}"
+    printf "%s7. Delete backup Database%s\n" "${GREEN}" "${NC}"
+    printf "%s8. Restart MariaDB%s\n" "${GREEN}" "${NC}"
+    printf "%s9. Enable MariaDB%s\n" "${GREEN}" "${NC}"
+    printf "%s10. Disable MariaDB%s\n" "${GREEN}" "${NC}"
     printf "%s ======================%s\n" "${GREEN}" "${NC}"
-    read -r -p " Nhap vao lua chon cua ban [0 = Thoat] " CHOICE
+    read -r -p " Enter your selection [0 = Exit] " CHOICE
     if [ -z "${CHOICE}" ]
     then
         CHOICE=1
@@ -50,16 +50,16 @@ do
         9)
             systemctl stop mariadb
             systemctl disable mariadb
-            printf "%s\n" "${GREEN}Tat MariaDB thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Enable MariaDB success.${NC}"
             menu_database
             ;;
         10)
             systemctl start mariadb
             systemctl enable mariadb
-            printf "%s\n" "${GREEN}Bat MariaDB thanh cong.${NC}"
+            printf "%s\n" "${GREEN}Disable MariaDB success.${NC}"
             menu_database
             ;;
         0) clear; menu_lemp ;;
-        *) clear; printf "%s\n" "${RED}Lua chon cua ban khong chinh xac. Vui long chon lai.${NC}";;
+        *) clear; printf "%s\n" "${RED}Your choice is not correct. Please choose again.${NC}";;
     esac
 done
