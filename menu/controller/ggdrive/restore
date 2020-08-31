@@ -17,7 +17,7 @@ source /var/hostvn/menu/helpers/function
 confirm_restore(){
     while true
     do
-        read -r -p "Ban muon khoi phuc du lieu ? (y/n) " promt_restore
+        read -r -p "You want to recover data? (y/n) " promt_restore
         echo
         if [[ "${promt_restore}" =~ ^([yY])$ || "${promt_restore}" =~ ^([nN])$ ]]; then
             break
@@ -36,7 +36,7 @@ set_var(){
 
 select_backup(){
     clear
-    echo "Chon ngay ban muon khoi phuc: "
+    echo "Select now you want to restore: "
     dates=()
     selects=$(rclone lsf "${remote}":"${IPADDRESS}")
     for entry in ${selects}; do
@@ -53,7 +53,7 @@ select_backup(){
 
 choose_domain(){
     clear
-    echo "Chon ten mien ban muon khoi phuc: "
+    echo "Select the domain name you want to recover: "
     selects=$(rclone lsf "${remote}":"${IPADDRESS}"/"${date}")
     for entry in ${selects}; do
         select=${entry///}
@@ -95,7 +95,7 @@ select_db(){
         fi
     done
 
-    echo "Chon file database muon khoi phuc"
+    echo "Select the database file you want to restore"
     PS3="Enter your selection [0 = Exit]: "
     select opt in "${sql_files[@]}"
     do
@@ -112,16 +112,16 @@ _run(){
     select_backup
     if [ -z "${date}" ]; then
         clear
-        printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
+        printf "%s\n" "${RED}You have selected Cancel to restore data.${NC}"
     else
         choose_domain
 
         if [ -z "${domain}" ]; then
             clear
-            printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
+            printf "%s\n" "${RED}You have selected Cancel to restore data.${NC}"
         else
             if [ ! -f "${USER_DIR}/.${domain}.conf"  ]; then
-                ALERT=$(printf "%s\n" "${RED}Ten mien nay does not exist tren VPS.${NC}")
+                ALERT=$(printf "%s\n" "${RED}This domain name does not exist on VPS.${NC}")
             else
                 set_var
                 if ! if_db_exists "${db_name}"; then
@@ -131,19 +131,19 @@ _run(){
 
             if [[ -z "${ALERT}" ]]; then
                 clear
-                printf "%s\n" "${GREEN}Dang download backup tu Google Drive....${NC}"
+                printf "%s\n" "${GREEN}Downloading backup from Google Drive...${NC}"
                 download_backup
                 select_db
                 if [ -z "${sql}" ]; then
                     clear
-                    printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
+                    printf "%s\n" "${RED}You have selected Cancel to restore data.${NC}"
                 else
                     _restore_source
                     empty_db
                     _restore_db
                     rm -rf /home/backup/"${date}"/"${domain}"
                     clear
-                    printf "%s\n" "${GREEN}Khoi phuc du lieu success.${NC}"
+                    printf "%s\n" "${GREEN}Restore data with success .${NC}"
                 fi
             else
                 clear
@@ -165,18 +165,18 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
             select_remote
             if [ -z "${remote}" ]; then
                 clear
-                printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
+                printf "%s\n" "${RED}You have selected Cancel to restore data.${NC}"
             else
                 _run
             fi
         else
-            printf "%s\n" "${RED}Khong co ten mien nao tren VPS.${NC}"
+            printf "%s\n" "${RED}No domain name on VPS.${NC}"
         fi
     else
         clear
-        printf "%s\n" "${RED}Ban da chon Cancel khoi phuc du lieu.${NC}"
+        printf "%s\n" "${RED}You have selected Cancel to restore data.${NC}"
     fi
 else
-    printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"
+    printf "%s\n" "${RED}You have not configured a connection to Google Drive.${NC}"
 fi
 menu_ggdrive

@@ -20,7 +20,7 @@ set_var(){
 
 view_log(){
     clear
-    printf "%s\n" "${RED}Hien thi 10 dong log moi nhat..."
+    printf "%s\n" "${RED}Display the last 10 log..."
     echo ""
     tail /home/"${username}"/"${domain}"/logs/error.log
     printf "%s\n" "${RED}Vi tri file log: /home/${username}/${domain}/logs/error.log${NC}"

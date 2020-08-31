@@ -22,13 +22,13 @@ set_var(){
 
 check_update(){
     if [[ "${script_v}" == "${current_v}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Ban dang su dung phien ban moi nhat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}You are using the latest version.${NC}")
     fi
 }
 
 confirm_update(){
-    echo "Da phat hien phien ban moi."
-    read -r -p "Ban co muon cap nhat ${AUTHOR} Script khong ? (y/n) " promt_update
+    echo "New version detected."
+    read -r -p "Do you want to update ${AUTHOR} Script or not? (y/n) " promt_update
 }
 
 update(){
@@ -52,7 +52,7 @@ _run(){
             update
         else
             clear
-            printf "%s\n" "${GREEN}Ban da Cancel update ${AUTHOR} Script${NC}"
+            printf "%s\n" "${GREEN}You canceled the update ${AUTHOR} Script${NC}"
         fi
 
     else

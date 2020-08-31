@@ -18,7 +18,7 @@ source /var/hostvn/menu/helpers/variable_php
 source /var/hostvn/menu/helpers/mysql_variable
 
 confirm(){
-    read -r -p "Ban muon cap nhat lai thong so SCRIPT ? (y/n) " promtp_update
+    read -r -p "Would you like to update the SCRIPT? (y/n) " promtp_update
 }
 
 config_my_cnf(){
@@ -335,7 +335,7 @@ _run(){
     restart_service
     systemctl restart mariadb
     clear
-    printf "%s\n" "${GREEN}Cap nhat lai thong so success.${NC}"
+    printf "%s\n" "${GREEN}Update parameters successfully.${NC}"
 }
 
 confirm
@@ -343,7 +343,7 @@ confirm
 if [[ "${promtp_update}" =~ ^([yY])$ ]]; then
     _run
 else
-    printf "%s\n" "${GREEN}Ban da Cancel cap nhat lai thong so SCRIPT.${NC}"
+    printf "%s\n" "${GREEN}You have Canceled to update the SCRIPT parameters.${NC}"
 fi
 
 menu_vps

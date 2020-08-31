@@ -16,7 +16,7 @@ source /var/hostvn/menu/helpers/function
 confirm_destroy(){
     while true
     do
-        read -r -p "Ban muon xoa backup ? (y/n) " promt_destroy
+        read -r -p "You want to delete the backup ? (y/n) " promt_destroy
         echo
         if [[ "${promt_destroy}" =~ ^([yY])$ || "${promt_destroy}" =~ ^([nN])$ ]]; then
             break
@@ -27,7 +27,7 @@ confirm_destroy(){
 }
 
 select_backup(){
-    echo "Chon ngay ban muon khoi phuc: "
+    echo "Select now you want to restore: "
     selects=$(rclone lsf "${remote}":"${IPADDRESS}")
     for entry in ${selects}; do
         select=${entry///}
@@ -42,7 +42,7 @@ select_backup(){
 }
 
 choose_domain(){
-    echo "Chon ten mien ban muon xoa: "
+    echo "Select the domain name you want to delete: "
     selects=$(rclone lsf "${remote}":"${IPADDRESS}"/"${date}")
     for entry in ${selects}; do
         select=${entry///}
@@ -60,19 +60,19 @@ _run(){
     select_backup
     if [ -z "${date}" ]; then
         clear
-        printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
+        printf "%s\n" "${GREEN}You have Canceled backup deleted.${NC}"
     else
         choose_domain
 
         if [ -z "${domain}" ]; then
             clear
-            printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
+            printf "%s\n" "${GREEN}You have Canceled backup deleted.${NC}"
         else
             rclone delete "${remote}":/"${IPADDRESS}"/"${date}"/"${domain}" --rmdirs > /dev/null  2>&1
             rclone cleanup "${remote}":"${IPADDRESS}" > /dev/null  2>&1
             rm -rf /home/backup/"${date}"/"${domain}"
             clear
-            printf "%s\n" "${GREEN}Xoa backup success.${NC}"
+            printf "%s\n" "${GREEN}Delete backup success.${NC}"
         fi
     fi
 }
@@ -88,18 +88,18 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
             select_remote
             if [ -z "${remote}" ]; then
                 clear
-                printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
+                printf "%s\n" "${GREEN}You have Canceled backup deleted.${NC}"
             else
                 _run
             fi
         else
-            printf "%s\n" "${RED}Khong co ten mien nao tren VPS.${NC}"
+            printf "%s\n" "${RED}There are no domain names on VPS.${NC}"
         fi
     else
         clear
-        printf "%s\n" "${GREEN}Ban da Cancel xoa backup.${NC}"
+        printf "%s\n" "${GREEN}You have Canceled backup deleted.${NC}"
     fi
 else
-    printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"
+    printf "%s\n" "${RED}You have not connected with Google Drive yet.${NC}"
 fi
 menu_ggdrive

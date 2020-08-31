@@ -20,7 +20,7 @@ source /var/hostvn/menu/helpers/variable_php
 confirm(){
     while true
     do
-        read -r -p "Ban co muon thay doi phien ban PHP mac dinh khong ? (y/n) " prompt_php1
+        read -r -p "Do you want to change the default PHP version ? (y/n) " prompt_php1
         echo
         if [[ "${prompt_php1}" =~ ^([yY])$ || "${prompt_php1}" =~ ^([nN])$ ]];
         then
@@ -53,17 +53,17 @@ set_var(){
 
 check_duplicate_php(){
     if [[ "${php1_new}" == "${php1_version}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP mac dinh ban muon thay doi giong phien ban hien tai. Cancel cai dat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The default PHP version you want to change is the same as the current version. Cancel the installation..${NC}")
     fi
 
     if [[ "${php2_release}" == "yes" && "${php1_new}" == "${php2_version}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP mac dinh ban chon giong phien ban PHP 2. Cancel cai dat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The default PHP version you choose is the same as the PHP version 2. Cancel the installation.${NC}")
     fi
 }
 
 select_php_ver(){
     clear
-    printf "Choosephien ban PHP mac dinh\n"
+    printf "Choose the default PHP version\n"
     PS3="Enter your selection [0 = Exit]: "
     select opt in "${PHP_LIST[@]}"
     do
@@ -335,7 +335,7 @@ _run(){
             write_info
 
             clear
-            printf "%s\n" "${GREEN}Thay doi phien ban PHP success.${NC}"
+            printf "%s\n" "${GREEN}PHP version changed successfully.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"
@@ -350,7 +350,7 @@ confirm
 if [[ "${prompt_php1}" =~ ^([yY])$ ]]; then
     _run
 else
-    printf "%s\n" "${GREEN}Ban da Cancel thay doi phien ban PHP.${NC}"
+    printf "%s\n" "${GREEN}You have Canceled the PHP version change.${NC}"
 fi
 
 menu_php

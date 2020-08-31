@@ -19,7 +19,7 @@ source /var/hostvn/menu/helpers/variable_php
 
 confirm(){
     prompt_php2="n"
-    read -r -p "Ban co muon thay doi phien ban PHP 2 khong ? (y/n) " prompt_php2
+    read -r -p "Do you want to change PHP 2 version? (y/n) " prompt_php2
 }
 
 set_var(){
@@ -44,21 +44,21 @@ set_var(){
 
 check_duplicate_php(){
     if [[ "${php2_new}" == "${php2_version}" ]]; then
-        ALERT=$(printf "${RED}Phien ban PHP 2 ban muon thay giong phien ban PHP 2 hien tai. Cancel cai dat.${NC}\n")
+        ALERT=$(printf "${RED}PHP 2 version you want to replace the current version of PHP 2. Cancel the installation.${NC}\n")
     fi
 
     if [[ "${php2_new}" == "${php1_version}" ]]; then
-        ALERT=$(printf "${RED}Phien ban PHP 2 ban chon giong phien ban PHP 1. Cancel cai dat.${NC}\n")
+        ALERT=$(printf "${RED}PHP Version 2 you choose between PHP version 1. Cancel installation.${NC}\n")
     fi
 }
 
 select_php_ver(){
-    read -r -p "Ban co muon thay doi phien ban PHP thu 2 khong ? (y/n) " prompt_php2
+    read -r -p "Do you want to change PHP version 2? (y/n) " prompt_php2
     if [[ "${prompt_php2}" =~ ^([yY])$ ]]; then
         clear
         while true
         do
-            printf "Choosephien ban PHP thu 2\n"
+            printf "Choose PHP version 2\n"
             PS3="Enter your selection: "
             select opt2 in "${PHP_LIST[@]}"
             do
@@ -336,13 +336,13 @@ _run(){
             write_info
 
             clear
-            printf "%s\n" "${GREEN}Thay doi phien ban PHP success.${NC}"
+            printf "%s\n" "${GREEN}PHP Changed successfully.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"
         fi
     else
-        printf "%s\n" "${RED}PHP 2 chua duoc cai dat. Vui long cai dat PHP 2 truoc.${NC}"
+        printf "%s\n" "${RED}PHP 2 is not installed. Please install PHP 2 first.${NC}"
     fi
 }
 
@@ -351,6 +351,6 @@ confirm
 if [[ "${prompt_php2}" =~ ^([yY])$ ]]; then
     _run
 else
-    printf "%s\n" "${GREEN}Ban da Cancel thay doi phien ban PHP 2.${NC}"
+    printf "%s\n" "${GREEN}You have Canceled to change PHP version 2.${NC}"
 fi
 menu_php

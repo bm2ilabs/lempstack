@@ -17,7 +17,7 @@ source /var/hostvn/menu/helpers/function
 confirm_destroy(){
     while true
     do
-        read -r -p "Ban muon xoa backup ? (y/n) " promt_destroy
+        read -r -p "You want to delete the backup ? (y/n) " promt_destroy
         echo
         if [[ "${promt_destroy}" =~ ^([yY])$ || "${promt_destroy}" =~ ^([nN])$ ]]; then
             break
@@ -35,11 +35,11 @@ _run(){
         select_remote
         if [ -z "${remote}" ]; then
             clear
-            printf "%s\n" "${RED}Ban da Cancel hanh dong.${NC}"
+            printf "%s\n" "${RED}You have Canceled the operation.${NC}"
         else
             rclone config delete "${remote}"
             clear
-            printf "%s\n" "${GREEN}Xoa remote success.${NC}"
+            printf "%s\n" "${GREEN}Delete remote success.${NC}"
         fi
     fi
 }
@@ -48,6 +48,6 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
     _run
 else
     clear
-    printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"
+    printf "%s\n" "${RED}You have not configured a connection to Google Drive.${NC}"
 fi
 menu_ggdrive

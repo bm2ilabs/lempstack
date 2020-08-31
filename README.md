@@ -34,7 +34,7 @@ Script written in shell used to install LEMP Stack (Nginx - MariaDB - PHP-FPM) o
 - Install: ClamAV, Naxsi Firewall.
 - DO NOT COLLECT ANY INFORMATION ON YOUR VPS.
 
-### 1.2. Optimal
+### 1.2. Optimization
 
 - Optimal configuration of MySQL, Nginx, PHP, Opcache, Memcached, Redis in accordance with VPS parameters.
 - Configure Brotli Compress.

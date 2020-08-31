@@ -15,7 +15,7 @@
 source /var/hostvn/menu/helpers/function
 
 select_date(){
-    echo "Chon ngay: "
+    echo "Select date: "
     selects=$(rclone lsf "${remote}":"${IPADDRESS}")
     dates=()
     for entry in ${selects}; do
@@ -38,7 +38,7 @@ _run(){
         printf "%s\n" "${RED}You have chosen to cancel the action.${NC}"
     else
         echo ""
-        echo "Dang load danh sach. Vui long doi..."
+        echo "Loading list. Please wait..."
         echo ""
         rclone lsf "${remote}":/"${IPADDRESS}"/"${date}"
         echo ""
@@ -57,6 +57,6 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
         _run
     fi
 else
-    printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"
+    printf "%s\n" "${RED}You have not configured a connection to Google Drive${NC}"
 fi
 menu_ggdrive

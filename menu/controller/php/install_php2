@@ -115,12 +115,12 @@ memory_calculation(){
 
 check_php2_release(){
     if [[ "${php2_release}" == "yes" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP thu 2 da duoc cai dat tren VPS.${NC}")
+        ALERT=$(printf "%s\n" "${RED}PHP version 2 is installed on VPS.${NC}")
     fi
 }
 
 select_php_ver(){
-    printf "Choosephien ban PHP ban muon cai dat\n"
+    printf "Choose the PHP version you want to install\n"
     PS3="Enter your selection [0 = Exit]: "
     select opt in "${PHP_LIST[@]}"
     do
@@ -132,7 +132,7 @@ select_php_ver(){
 
 check_duplicate_php(){
     if [[ "${php2_version}" == "${php1_version}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Phien ban PHP thu 2 trung voi phien ban mac dinh. Cancel cai dat.${NC}")
+        ALERT=$(printf "%s\n" "${RED}PHP version 2 same as the defaul version. Cancel the installation.${NC}")
     fi
 }
 
@@ -384,7 +384,7 @@ _run(){
             systemctl start "${php2_version}"-php-fpm
             systemctl enable "${php2_version}"-php-fpm
             clear
-            printf "%s\n" "${GREEN}Cai dat success.${NC}"
+            printf "%s\n" "${GREEN}Install success.${NC}"
         else
             clear
             printf "%s\n" "${ALERT}"

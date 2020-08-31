@@ -15,9 +15,9 @@
 # shellcheck disable=SC2034
 source /var/hostvn/menu/helpers/function
 
-printf "%s=========================%s\n" "${GREEN}" "${NC}"
-printf "%sGo bo SSL - Let's Encrypt%s\n" "${GREEN}" "${NC}"
-printf "%s=========================%s\n" "${GREEN}" "${NC}"
+printf "%s=============================%s\n" "${GREEN}" "${NC}"
+printf "%s Delete SSL - Let's Encrypt  %s\n" "${GREEN}" "${NC}"
+printf "%s=============================%s\n" "${GREEN}" "${NC}"
 echo
 
 validate(){
@@ -94,9 +94,9 @@ _run(){
         remove_ssl_cert
         systemctl restart nginx.service
         clear
-        printf "%s\n" "${GREEN}Go bo SSL Let's Encrypt success.${NC}"
+        printf "%s\n" "${GREEN}SSL Let's Encrypt successfully Deleted.${NC}"
         if [[ "${SOURCE}" == "wordpress" ]]; then
-            printf "%s\n" "${GREEN}Luu y: Ban can cau hinh lai Plugins cache va Plugins Seo tai menu 7-7${NC}"
+            printf "%s\n" "${GREEN}Note: You need to reconfigure Plugins cache and Plugins Seo at menu 7-7${NC}"
         fi
         echo ""
     else

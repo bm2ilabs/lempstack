@@ -15,11 +15,11 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s======================%s\n" "${GREEN}" "${NC}"
-printf "%sChinh sua thong so php%s\n" "${GREEN}" "${NC}"
+printf "%s  Edit php parameters %s\n" "${GREEN}" "${NC}"
 printf "%s======================%s\n" "${GREEN}" "${NC}"
 
-printf "%s\n" "${RED}Luu y: Tat ca cac thong so deu da duoc toi uu theo thong so cua VPS.${NC}"
-printf "%s\n" "${RED}Can suy nghi ky truoc khi thay doi bat ky thong so nao.${NC}"
+printf "%s\n" "${RED}Note: All parameters have been optimized according to the VPS's parameters.${NC}"
+printf "%s\n" "${RED}Need to think carefully before changing any parameters.${NC}"
 
 set_variable(){
     ini_1="/etc/php.d/00-hostvn-custom.ini"
@@ -31,7 +31,7 @@ set_variable(){
 }
 
 select_parameter(){
-    echo "Choosethong so muon thay đoi"
+    echo "Choose the parameter you want to change"
     PS3='Enter your choice (1-5): '
     options=("post_max_size" "upload_max_filesize" "memory_limit" "max_input_time" "max_execution_time" "Cancel")
     select opt in "${options[@]}"
@@ -51,12 +51,12 @@ select_parameter(){
 input_parameter(){
     while true
     do
-        read -r -p "Nhap vao thong so moi (Ex: 120) [0 = Exit]: " num
+        read -r -p "Enter the new number (Ex: 120) [0 = Exit]: " num
         echo
         if [[ "${num}" =~ ^[0-9]+$ ]]; then
             break
         else
-            printf "%s\n"  "${RED}Gia tri ban nhap khong dung. Vui long nhap lai.${NC}"
+            printf "%s\n"  "${RED}The value you entered is not correct. Please re-enter.${NC}"
         fi
     done
 }
@@ -98,17 +98,17 @@ _run(){
     set_variable
     select_parameter
     if [ "${parameter}" == "0" ]; then
-        printf "%s\n" "${RED}Cancel thay đoi thong so PHP.${NC}"
+        printf "%s\n" "${RED}Cancel change the PHP parameter${NC}"
     else
         input_parameter
 
         if [ "${num}" == "0" ]; then
-            printf "%s\n" "${RED}Cancel thay đoi thong so PHP.${NC}"
+            printf "%s\n" "${RED}Cancel change the PHP parameter${NC}"
         else
             remove_ini_bak
             change_parameter
             restart_php
-            printf "%s\n" "${GREEN}Thay đoi thong so PHP success.${NC}"
+            printf "%s\n" "${GREEN}Replace parameters with PHP success.${NC}"
         fi
     fi
 }

@@ -15,7 +15,7 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s========================%s\n" "${GREEN}" "${NC}"
-printf "%s Cau hinh Let's Encrypt %s\n" "${GREEN}" "${NC}"
+printf "%s Configure Let's Encrypt %s\n" "${GREEN}" "${NC}"
 printf "%s========================%s\n" "${GREEN}" "${NC}"
 echo
 
@@ -51,7 +51,7 @@ _run(){
         sleep 2
         restart_nginx
         clear
-        printf "%s\n" "${GREEN}Cau hinh SSL success.${NC}"
+        printf "%s\n" "${GREEN}Configure SSL success.${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"

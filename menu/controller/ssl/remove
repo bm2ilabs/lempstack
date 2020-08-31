@@ -15,7 +15,7 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s=================%s\n" "${GREEN}" "${NC}"
-printf "%sGo bo SSL tra phi%s\n" "${GREEN}" "${NC}"
+printf "%s Remove Paid SSL %s\n" "${GREEN}" "${NC}"
 printf "%s=================%s\n" "${GREEN}" "${NC}"
 echo
 
@@ -84,9 +84,9 @@ _run(){
         edit_vhost
         systemctl restart nginx.service
         clear
-        printf "%sGo bo SSL success.%s\n" "${GREEN}" "${NC}"
+        printf "%s SSL removed successfully.%s\n" "${GREEN}" "${NC}"
         if [[ "${SOURCE}" == "wordpress" ]]; then
-            printf "%s\n" "${GREEN}Luu y: Ban can cau hinh lai Plugins cache va Plugins Seo tai menu 7-7${NC}"
+            printf "%s\n" "${GREEN}Note: You need to reconfigure Plugins cache and Plugins Seo at menu 7-7${NC}"
         fi
         echo ""
     else

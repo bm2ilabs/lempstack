@@ -23,51 +23,51 @@ set_var(){
 
 set_color(){
     if [[ -z "${nginx_status}" ]]; then
-        nginx_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        nginx_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        nginx_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        nginx_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[ -z "${php_status}" ]]; then
-        php_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        php_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        php_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        php_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[  -z "${mysql_status}" ]]; then
-        mysql_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        mysql_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        mysql_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        mysql_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[  -z "${ssh_status}" ]]; then
-        ssh_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        ssh_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        ssh_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        ssh_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[  -z "${lfd_status}" ]]; then
-        lfd_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        lfd_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        lfd_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        lfd_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[  -z "${pure_status}" ]]; then
-        pure_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        pure_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        pure_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        pure_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[ -z "${memcached_status}" ]]; then
-        memcached_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        memcached_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        memcached_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        memcached_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 
     if [[ -z "${redis_status}" ]]; then
-        redis_status=$(printf "%s\n" "${RED}Khong hoat dong${NC}")
+        redis_status=$(printf "%s\n" "${RED}Not working${NC}")
     else
-        redis_status=$(printf "%s\n" "${GREEN}Hoat dong${NC}")
+        redis_status=$(printf "%s\n" "${GREEN}Working${NC}")
     fi
 }
 

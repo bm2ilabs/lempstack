@@ -11,7 +11,7 @@
 ######################################################################
 
 printf "%s=================%s\n" "${GREEN}" "${NC}"
-printf "%sThay đoi port SSH%s\n" "${GREEN}" "${NC}"
+printf "%sChange the SSH port%s\n" "${GREEN}" "${NC}"
 printf "%s=================%s\n" "${GREEN}" "${NC}"
 
 set_var(){
@@ -27,41 +27,41 @@ input(){
     clear
     while true
     do
-        read -r -p "Nhap vao port ban muon đoi [0 = Exit]: " port_new
+        read -r -p "Enter the port you want to use [0 = Exit]: " port_new
         echo
         if [[ ${port_new} =~ ^-?[0-9]+$ ]]; then
             break
         else
-            printf "%s\n" "${RED}Port khong dung dinh dang, vui long nhap lai.${NC}"
+            printf "%s\n" "${RED}Port is incorrect format, please re-enter.${NC}"
         fi
     done
 }
 
 check_port(){
     if [ -z "${port_new}" ]; then
-        ALERT=$(printf "%s\n" "${RED}Ban chua nhap Port.${NC}")
+        ALERT=$(printf "%s\n" "${RED}You have not entered Port.${NC}")
     fi
 
     if [[ "${port_new}" == "${current_port}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban nhap trung vui Port SSH hien tai.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The port you selected is the same as the current port SSH.${NC}")
     fi
 
     if [[ "${port_new}" == "${admin_port}" || "${port_new}" == "${csf_port}" || "${port_new}" == "${ftp_port}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc su dung. Vui long chon port khac.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The port you selected is already in use. Please select another port.${NC}")
     fi
 
     check_se=$(semanage port -l | grep "${port_new}")
     if [[ "${port_new}" == "11211" || "${port_new}" == "6379" || -n  "${check_se}" ]]; then
-        ALERT=$(printf "%s\n" "${RED}Port ban chon da duoc su dung. Vui long chon port khac.${NC}")
+        ALERT=$(printf "%s\n" "${RED}The port you selected is already in use. Please select another port.${NC}")
     fi
 
     if check_port_exists "${port_new}"; then
-        ALERT=$(printf "%s\n" "${RED}Port da duoc su dung. Cancel thay doi port SSH.${NC}")
+        ALERT=$(printf "%s\n" "${RED}Port is already in use. Cancel change SSH port.${NC}")
     fi
 }
 
 _change_port(){
-    echo "Dang tien hanh thay đoi port SSH..."
+    echo "Register changing SSH port..."
     echo ""
     sleep 1
     if [[ ! -f "/etc/ssh/sshd_config.orig" ]]; then
@@ -81,7 +81,7 @@ _change_port(){
     csf -x
     csf -e
     clear
-    printf "%s\n" "${GREEN}Da thay đoi Port SSH sang ${port_new} success.${NC}"
+    printf "%s\n" "${GREEN}Changed Port SSH to ${port_new} success.${NC}"
 }
 
 _run(){
@@ -100,7 +100,7 @@ port_new=""
 input
 if [[ "${port_new}" == "0" ]]; then
     clear
-    printf "%s\n" "${RED}Ban da chon Cancel thay doi Port.${NC}"
+    printf "%s\n" "${RED}You have selected Cancel to change the Port.${NC}"
 else
     _run
 fi

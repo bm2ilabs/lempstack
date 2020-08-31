@@ -15,13 +15,13 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s\n" "${GREEN}======================${NC}"
-printf "%s\n" "${GREEN}Phan quyen Chown/Chmod${NC}"
+printf "%s\n" "${GREEN}Permission Chown/Chmod${NC}"
 printf "%s\n" "${GREEN}======================${NC}"
 
 action(){
     while true
     do
-        read -r -p "Xac nhan phan quyen cho ten mien: ${domain}? (y/n): " confirm
+        read -r -p "Confirmed domain name authorization: ${domain}? (y/n): " confirm
         echo
         if [[ "${confirm}" =~ ^([yY])$ || "${confirm}" =~ ^([nN])$ ]]; then
             break
@@ -43,10 +43,10 @@ action(){
         find /home/"${username}"/"${domain}"/public_html/ -type f -print0 | xargs -I {} -0 chmod 0644 {}
         chown -R "${username}":"${username}" /home/"${username}"
         clear
-        printf "%s\n" "${GREEN}Da phan quyen cho website: ${domain}.${NC}"
+        printf "%s\n" "${GREEN}Permission for the website: ${domain}.${NC}"
     else
         clear
-        printf "%s\n" "${RED}Cancel phan quyen.${NC}"
+        printf "%s\n" "${RED}Cancel action.${NC}"
     fi
 }
 

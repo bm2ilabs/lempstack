@@ -26,7 +26,7 @@ show_info(){
     printf "CPU loading     : %s\n" "$(top -b -n1 | grep "Cpu(s)" | awk '{print $2 + $4}')%"
     printf "Ram             : %s\n" "$(bytes_for_humans "${MemTotal}") (Con trong: $(bytes_for_humans "${MemAvailable}"))"
     printf "Swap            : %s\n" "$(bytes_for_humans "${SwapTotal}") (Con trong: $(bytes_for_humans "${SwapFree}") )"
-    printf "Disk da su dung : %s\n" "$(df -lh | awk '{if ($6 == "/") { print $5 }}' | head -1 | cut -d'%' -f1)%"
+    printf "Disk in use : %s\n" "$(df -lh | awk '{if ($6 == "/") { print $5 }}' | head -1 | cut -d'%' -f1)%"
     echo ""
 }
 

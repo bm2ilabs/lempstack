@@ -15,7 +15,7 @@
 confirm(){
     while true
     do
-        read -r -p "Ban muon cai dat ClamAV ? (y/n) " prompt_clamav
+        read -r -p "Do you want to install ClamAV ? (y/n) " prompt_clamav
         echo
         if [[ "${prompt_clamav}" =~ ^([yY])$ || "${prompt_clamav}" =~ ^([nN])$ ]]; then
             break
@@ -27,7 +27,7 @@ confirm(){
 
 install(){
     if [ -f "/etc/clamd.d/scan.conf" ]; then
-        printf "%s\n" "${RED}ClamAV da duoc cai dat. Ban khong can cai dat lai.${NC}"
+        printf "%s\n" "${RED}ClamAV installed. You don't need to reinstall.${NC}"
     else
         if [[ ${OS_VER} -eq 8 ]]; then
             dnf install clamav-server clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd -y
@@ -47,7 +47,7 @@ install(){
             echo "DatabaseCustomURL http://cdn.malware.expert/malware.expert.fp"
         } >> /etc/freshclam.conf
         clear
-        printf "%s\n" "${GREEN}Cai dat ClamAV success.${NC}"
+        printf "%s\n" "${GREEN}ClamAV successfully installed.${NC}"
         echo ""
     fi
 }
@@ -58,7 +58,7 @@ if [[ "${prompt_clamav}" =~ ^([yY])$ ]];then
     install
 else
     clear
-    printf "%s\n" "${GREEN}Ban da Cancel cai dat ClamAV.${NC}"
+    printf "%s\n" "${GREEN}You have Canceled the ClamAV installation.${NC}"
 fi
 
 menu_security

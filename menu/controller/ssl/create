@@ -15,7 +15,7 @@
 source /var/hostvn/menu/helpers/function
 
 printf "%s===================%s\n" "${GREEN}" "${NC}"
-printf "%sCai dat SSL tra phi%s\n" "${GREEN}" "${NC}"
+printf "%sPaid SSL installation%s\n" "${GREEN}" "${NC}"
 printf "%s===================%s\n" "${GREEN}" "${NC}"
 echo
 
@@ -106,9 +106,10 @@ remove_letencrypt(){
 }
 
 create_crt(){
-    echo "Dien ma CRT va ma CA vao file."
-    echo "De luu file hay bam CTRL + X va nhan ENTER sau đo bam tiep CTRL + O"
-    echo "Dang mo trinh soan thao ...."
+    echo "Enter the CRT code and the CA file into the file"
+    echo "
+To save the file or press CTRL + X and press ENTER then press CTRL + O"
+    echo "Open editor ...."
     sleep 3
     if [[ ! -d "/etc/nginx/ssl/${domain}" ]]; then
         mkdir -p /etc/nginx/ssl/"${domain}"
@@ -117,8 +118,8 @@ create_crt(){
 }
 
 create_private_key(){
-    echo "De lưu file hay bam CTRL + X va nhan ENTER sau đo bam tiep CTRL + O"
-    echo "Dang mo trinh soan thao ...."
+    echo "To save the file or press CTRL + X and press ENTER then press CTRL + O"
+    echo "Open editor ...."
     sleep 3
     if [[ ! -d "/etc/nginx/ssl/${domain}" ]]; then
         mkdir -p /etc/nginx/ssl/"${domain}"
@@ -229,7 +230,7 @@ _run(){
         create_ssl_vhost
         restart_nginx
         clear
-        printf "%sCau hinh SSL success.%s\n" "${GREEN}" "${NC}"
+        printf "%sConfigure SSL success.%s\n" "${GREEN}" "${NC}"
     else
         clear
         printf "%s\n" "${ALERT}"

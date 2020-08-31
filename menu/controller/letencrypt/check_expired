@@ -20,7 +20,7 @@ check_expired(){
         openssl x509 -noout -dates -in /etc/letsencrypt/live/"${domain}"/cert.pem
     else
         clear
-        printf "%s\n" "${RED}Ten mien nay chua đuoc cai dat Let's Encrypt.${NC}"
+        printf "%s\n" "${RED}This domain name has not yet installed Let's Encrypt.${NC}"
     fi
 }
 

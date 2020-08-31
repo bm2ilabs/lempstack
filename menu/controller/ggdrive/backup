@@ -36,12 +36,12 @@ _run(){
         mysqldump -uadmin -p"${mysql_pwd}" "${db_name}" > "${db_name}".sql
     fi
     clear
-    printf "%s\n" "${GREEN}Dang tien hanh upload du lieu len Google Drive. Vui long doi den khi hoan tat.${NC}"
-    printf "%s\n" "${GREEN}Thoi gian upload phu thuoc vao dung luong cua file backup.${NC}"
+    printf "%s\n" "${GREEN}Ongoing upload of data to Google Drive. Please wait until finished.${NC}"
+    printf "%s\n" "${GREEN}Upload time depends on the size of the backup file.${NC}"
     rclone copy /home/backup "${remote}":"${IPADDRESS}" >> /var/log/rclone.log 2>&1
     rm -rf /home/backup/"${CURRENT_DATE}"/"${domain}"
     clear
-    printf "%s\n" "${GREEN}Sao luu du lieu success.${NC}"
+    printf "%s\n" "${GREEN}Backup success data.${NC}"
 }
 
 if [ -f "/root/.config/rclone/rclone.conf" ]; then
@@ -51,22 +51,22 @@ if [ -f "/root/.config/rclone/rclone.conf" ]; then
         select_remote
         if [ -z "${remote}" ]; then
             clear
-            printf "%s\n" "${RED}Ban da Cancel thao tac.${NC}"
+            printf "%s\n" "${RED}You have canceled the operation.${NC}"
         else
             select_domain
             if [ -z "${domain}" ]; then
                 clear
-                printf "%s\n" "${RED}Ban da Cancel thao tac.${NC}"
+                printf "%s\n" "${RED}You have canceled the operation.${NC}"
             else
                 _run
             fi
         fi
     else
-        printf "%s\n" "${RED}Khong co ten mien nao tren VPS.${NC}"
+        printf "%s\n" "${RED}There are no domain names on VPS.${NC}"
     fi
 else
     clear
-    printf "%s\n" "${RED}Ban chua cau hinh ket noi voi Google Drive.${NC}"
+    printf "%s\n" "${RED}You have not connected with Google Drive yet.${NC}"
 fi
 
 menu_ggdrive
