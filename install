@@ -169,7 +169,7 @@ set_locale(){
 #Dowload primary Script #
 #########################
 dowload_script(){
-    curl -sO ${SCRIPT_LINK}/hostvn && dos2unix hostvn &> /dev/null && chmod +x hostvn && sh hostvn
+    dos2unix hostvn &> /dev/null && chmod +x hostvn && sh hostvn
 }
 
 welcome
